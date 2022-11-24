@@ -1,0 +1,80 @@
+object Form1: TForm1
+  Left = 256
+  Height = 653
+  Top = 145
+  Width = 992
+  Caption = 'Файловый менеджер'
+  ClientHeight = 653
+  ClientWidth = 992
+  LCLVersion = '2.2.4.0'
+  object ShellTreeView1: TShellTreeView
+    Left = 16
+    Height = 560
+    Top = 56
+    Width = 192
+    FileSortType = fstNone
+    TabOrder = 0
+    ObjectTypes = [otFolders]
+    ShellListView = ShellListView1
+  end
+  object ShellListView1: TShellListView
+    Left = 224
+    Height = 558
+    Top = 56
+    Width = 752
+    Color = clDefault
+    SortColumn = 0
+    TabOrder = 1
+    OnSelectItem = ShellListView1SelectItem
+    ObjectTypes = [otFolders, otNonFolders]
+    ShellTreeView = ShellTreeView1
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 630
+    Width = 992
+    Panels = <>
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 992
+    Caption = 'ToolBar1'
+    TabOrder = 3
+    object ComboBox1: TComboBox
+      Left = 27
+      Height = 23
+      Top = 2
+      Width = 100
+      ItemHeight = 15
+      Items.Strings = (
+        'Значки'
+        'Список'
+        'Таблица'
+        'Мелкие значки'
+      )
+      OnSelect = ComboBox1Select
+      TabOrder = 0
+      Text = 'Вид'
+    end
+    object Label1: TLabel
+      Left = 1
+      Height = 15
+      Top = 2
+      Width = 26
+      Caption = 'Вид: '
+      ParentColor = False
+    end
+    object Button1: TButton
+      Left = 127
+      Height = 22
+      Top = 2
+      Width = 75
+      Caption = 'Открыть'
+      OnClick = Button1Click
+      TabOrder = 1
+    end
+  end
+end
