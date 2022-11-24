@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls;
+  StdCtrls, Windows, LazUTF8, Process;
 
 type
 
@@ -22,8 +22,9 @@ type
     ToolBar1: TToolBar;
     procedure Button1Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
+    procedure ShellListView1DblClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
-      Selected: Boolean);
+      Selected: boolean);
   private
 
   public
@@ -32,6 +33,7 @@ type
 
 var
   Form1: TForm1;
+  Path: string;
 
 implementation
 
@@ -40,32 +42,50 @@ implementation
 { TForm1 }
 
 procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
-  Selected: Boolean);
+  Selected: boolean);
 begin
-  StatusBar1.SimpleText:=ShellListView1.GetPathFromItem(Item);
-
+  StatusBar1.SimpleText := ShellListView1.GetPathFromItem(Item);
+  Path := ShellListView1.GetPathFromItem(Item);
 end;
 
 procedure TForm1.ComboBox1Select(Sender: TObject);
 begin
   case ComboBox1.ItemIndex of
-  0: ShellListView1.ViewStyle:=vsIcon;
-  1: ShellListView1.ViewStyle:=vsList;
-  2: ShellListView1.ViewStyle:=vsReport;
-  3: ShellListView1.ViewStyle:=vsSmallIcon;
+    0: ShellListView1.ViewStyle := vsIcon;
+    1: ShellListView1.ViewStyle := vsList;
+    2: ShellListView1.ViewStyle := vsReport;
+    3: ShellListView1.ViewStyle := vsSmallIcon;
   end;
+end;
+
+procedure TForm1.ShellListView1DblClick(Sender: TObject);
+begin
+
+  ShellExecute(0, 'open', PChar(Path), nil, nil, SW_SHOWNORMAL);
+
+  if ExtractFileExt(Path) = '.txt' then
+  begin
+    with TProcess.Create(nil) do
+      try
+        Executable := 'notepad.exe';
+        Parameters.Add(Path);
+        Execute;
+      finally
+        Free;
+      end;
+  end;
+
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   try
-    ShellListView1.Root:=StatusBar1.SimpleText;
+    ShellListView1.Root := StatusBar1.SimpleText;
   except
     on E: EInvalidPath do
-      begin end;
+      ShowMessage('Я ещё не умею открывать файлы :(');
   end;
 end;
 
 
 end.
-
