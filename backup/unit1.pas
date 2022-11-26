@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, Windows, LazUTF8, Process;
+  StdCtrls, LazUTF8, FileOpenModule;
 
 type
 
@@ -14,6 +14,7 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     ComboBox1: TComboBox;
     Label1: TLabel;
     ShellListView1: TShellListView;
@@ -44,48 +45,46 @@ implementation
 procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
   Selected: boolean);
 begin
+
   StatusBar1.SimpleText := ShellListView1.GetPathFromItem(Item);
   Path := ShellListView1.GetPathFromItem(Item);
+
 end;
 
 procedure TForm1.ComboBox1Select(Sender: TObject);
 begin
+
   case ComboBox1.ItemIndex of
     0: ShellListView1.ViewStyle := vsIcon;
     1: ShellListView1.ViewStyle := vsList;
     2: ShellListView1.ViewStyle := vsReport;
     3: ShellListView1.ViewStyle := vsSmallIcon;
   end;
+
 end;
 
 procedure TForm1.ShellListView1DblClick(Sender: TObject);
 begin
 
-  ShellExecute(0, 'open', PChar(Path), nil, nil, SW_SHOWNORMAL);
-
-  if ExtractFileExt(Path) = '.txt' then
+  if (ExtractFileExt(Path) = '') then
   begin
-    with TProcess.Create(nil) do
-      try
-        Executable := 'notepad.exe';
-        Parameters.Add(Path);
-        Execute;
-      finally
-        Free;
-      end;
+    ShellListView1.Root := Path;
   end;
+
+  FileOpen(Path);
 
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
+
   try
     ShellListView1.Root := StatusBar1.SimpleText;
   except
     on E: EInvalidPath do
       ShowMessage('Я ещё не умею открывать файлы :(');
   end;
-end;
 
+end;
 
 end.
