@@ -1,4 +1,4 @@
-program project1;
+program FileOpenModule;
 
 {$mode objfpc}{$H+}
 
@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, Unit1, FileOpenModule
+  Forms, Unit1, unit2
   { you can add units after this };
 
 {$R *.res}

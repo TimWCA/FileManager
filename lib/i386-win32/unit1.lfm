@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 256
-  Height = 653
-  Top = 145
+  Left = 222
+  Height = 654
+  Top = 103
   Width = 992
   Caption = 'Файловый менеджер'
-  ClientHeight = 653
+  ClientHeight = 654
   ClientWidth = 992
   LCLVersion = '2.2.4.0'
   object ShellTreeView1: TShellTreeView
@@ -23,7 +23,9 @@ object Form1: TForm1
     Top = 56
     Width = 752
     Color = clDefault
+    MultiSelect = True
     SortColumn = 0
+    SortType = stData
     TabOrder = 1
     OnDblClick = ShellListView1DblClick
     OnSelectItem = ShellListView1SelectItem
@@ -33,7 +35,7 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23
-    Top = 630
+    Top = 631
     Width = 992
     Panels = <>
   end
