@@ -21,6 +21,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
+        <TopLine Value="67"/>
         <CursorPos X="49" Y="9"/>
         <UsageCount Value="52"/>
         <Loaded Value="True"/>
