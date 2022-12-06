@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, ExtCtrls, Buttons, LazUTF8, FileOpenModule;
+  StdCtrls, ExtCtrls, Buttons, LazUTF8, ShellApi;
 
 type
 
@@ -48,7 +48,7 @@ type
 
 var
   Form1: TForm1;
-  Path, OldName: string;
+  Path, OldName: utf8string;
 
 implementation
 
@@ -126,13 +126,16 @@ procedure TForm1.ShellListView1DblClick(Sender: TObject);
 begin
 
   {Открытие папки}
+  // Надо поискать другой способ для проверки на папку, ИМХО.
+  // Возможна ситуация, что будет файл без расширения.
   if (ExtractFileExt(Path) = '') then
   begin
     ShellListView1.Root := Path;
-  end;
+  end
 
   {Открытие файлов}
-  FileOpen(Path);
+  else
+    ShellExecute(0, nil,  PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
 
 end;
 
