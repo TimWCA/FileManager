@@ -135,8 +135,7 @@ begin
 
   {Открытие файлов}
   else
-    ShellExecute(0, nil, PChar('powershell'), PChar('/c start ' +
-      '"' + UTF8ToWinCP(Path) + '"'), nil, 0);
+    ShellExecute(0, nil,  PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
 
 end;
 

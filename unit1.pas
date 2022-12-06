@@ -13,8 +13,8 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    Button1: TButton;
-    ComboBox1: TComboBox;
+    OpenButton: TButton;
+    ViewComboBox: TComboBox;
     ArrowBack: TImage;
     ArrowForward: TImage;
     Label1: TLabel;
@@ -24,8 +24,8 @@ type
     ToolBar1: TToolBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure ComboBox1Select(Sender: TObject);
+    procedure OpenButtonClick(Sender: TObject);
+    procedure ViewComboBoxSelect(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -65,10 +65,10 @@ begin
 
 end;
 
-procedure TForm1.ComboBox1Select(Sender: TObject);
+procedure TForm1.ViewComboBoxSelect(Sender: TObject);
 begin
 
-  case ComboBox1.ItemIndex of
+  case ViewComboBox.ItemIndex of
     0: ShellListView1.ViewStyle := vsIcon;
     1: ShellListView1.ViewStyle := vsList;
     2: ShellListView1.ViewStyle := vsReport;
@@ -203,7 +203,7 @@ begin
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.OpenButtonClick(Sender: TObject);
 begin
 
   //showmessage(ExtractFileDir(ExtractFileDir(ExtractFileDir(Path))));
