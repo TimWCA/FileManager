@@ -550,6 +550,7 @@ object Form1: TForm1
     Width = 192
     FileSortType = fstNone
     TabOrder = 0
+    OnClick = ShellTreeView1Click
     ObjectTypes = [otFolders]
     ShellListView = ShellListView1
   end
@@ -591,7 +592,7 @@ object Form1: TForm1
     EdgeBorders = []
     Indent = 7
     TabOrder = 3
-    object ComboBox1: TComboBox
+    object ViewComboBox: TComboBox
       Left = 93
       Height = 23
       Top = 0
@@ -603,7 +604,7 @@ object Form1: TForm1
         'Таблица'
         'Мелкие значки'
       )
-      OnSelect = ComboBox1Select
+      OnSelect = ViewComboBoxSelect
       TabOrder = 0
       Text = 'Вид'
     end
@@ -615,13 +616,13 @@ object Form1: TForm1
       Caption = 'Вид: '
       ParentColor = False
     end
-    object Button1: TButton
+    object OpenButton: TButton
       Left = 193
       Height = 24
       Top = 0
       Width = 75
       Caption = 'Открыть'
-      OnClick = Button1Click
+      OnClick = OpenButtonClick
       TabOrder = 1
     end
     object ArrowBack: TImage
@@ -679,5 +680,21 @@ object Form1: TForm1
       Proportional = True
       ShowHint = True
     end
+  end
+  object PathEdit: TEdit
+    Left = 16
+    Height = 23
+    Top = 32
+    Width = 880
+    TabOrder = 4
+  end
+  object GoButton: TButton
+    Left = 901
+    Height = 25
+    Top = 32
+    Width = 75
+    Caption = 'Перейти'
+    OnClick = GoButtonClick
+    TabOrder = 5
   end
 end
