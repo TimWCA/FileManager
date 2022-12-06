@@ -13,6 +13,8 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    GoButton: TButton;
+    PathEdit: TEdit;
     OpenButton: TButton;
     ViewComboBox: TComboBox;
     ArrowBack: TImage;
@@ -24,7 +26,12 @@ type
     ToolBar1: TToolBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
+    procedure GoButtonClick(Sender: TObject);
     procedure OpenButtonClick(Sender: TObject);
+    procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
+    procedure ShellTreeView1Click(Sender: TObject);
+    procedure ShellTreeView1SelectionChanged(Sender: TObject);
     procedure ViewComboBoxSelect(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
@@ -38,8 +45,6 @@ type
       Shift: TShiftState);
     procedure ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
-    procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
-      Selected: boolean);
   private
 
   public
@@ -59,10 +64,8 @@ implementation
 procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
   Selected: boolean);
 begin
-
   StatusBar1.SimpleText := ShellListView1.GetPathFromItem(Item);
   Path := ShellListView1.GetPathFromItem(Item);
-
 end;
 
 procedure TForm1.ViewComboBoxSelect(Sender: TObject);
@@ -84,6 +87,7 @@ begin
   if ((key = $25) and (ssAlt in Shift)) then
     try
       ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
+      PathEdit.Text := ShellListView1.Root;
     except
     end;
 
@@ -93,6 +97,7 @@ begin
     if (ExtractFileExt(Path) = '') then
       try
         ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
+        PathEdit.Text := ShellListView1.Root;
       except
       end;
   end;
@@ -109,6 +114,7 @@ begin
     if (ExtractFileExt(Path) = '') then
       try
         ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
+        PathEdit.Text := ShellListView1.Root;
       except
       end;
   end;
@@ -117,6 +123,7 @@ begin
   if (Button = mbExtra1) then
     try
       ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
+      PathEdit.Text := ShellListView1.Root;
     except
     end;
 
@@ -131,11 +138,12 @@ begin
   if (ExtractFileExt(Path) = '') then
   begin
     ShellListView1.Root := Path;
+    PathEdit.Text := ShellListView1.Root;
   end
 
   {Открытие файлов}
   else
-    ShellExecute(0, nil,  PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
+    ShellExecute(0, nil, PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
 
 end;
 
@@ -218,6 +226,16 @@ begin
 
 end;
 
+procedure TForm1.ShellTreeView1Click(Sender: TObject);
+begin
+  PathEdit.Text := ShellListView1.Root;
+end;
+
+procedure TForm1.ShellTreeView1SelectionChanged(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.ArrowBackClick(Sender: TObject);
 begin
 
@@ -239,6 +257,17 @@ begin
     except
     end;
 
+end;
+
+procedure TForm1.GoButtonClick(Sender: TObject);
+begin
+  try
+    ShellListView1.Root := PathEdit.Text;
+  except
+    on E: EInvalidPath do
+      MessageDlg('Ошибка', 'Некорректный путь!',
+        mtError, mbOkCancel, '');
+  end;
 end;
 
 end.
