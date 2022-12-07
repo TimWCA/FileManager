@@ -28,6 +28,8 @@ type
     procedure ArrowForwardClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure OpenButtonClick(Sender: TObject);
+    procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
     procedure ShellTreeView1Click(Sender: TObject);
     procedure ShellTreeView1SelectionChanged(Sender: TObject);
     procedure ViewComboBoxSelect(Sender: TObject);
@@ -51,7 +53,7 @@ type
 
 var
   Form1: TForm1;
-  Path, OldName: utf8string;
+  Path, OldName: string;
 
 implementation
 

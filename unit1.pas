@@ -53,7 +53,7 @@ type
 
 var
   Form1: TForm1;
-  Path, OldName: utf8string;
+  Path, OldName: string;
 
 implementation
 
@@ -242,6 +242,7 @@ begin
   {Стрелка назад}
   try
     ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
+    PathEdit.Text := ShellListView1.Root;
   except
   end;
 
@@ -254,6 +255,7 @@ begin
   if (ExtractFileExt(Path) = '') then
     try
       ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
+      PathEdit.Text := ShellListView1.Root;
     except
     end;
 
