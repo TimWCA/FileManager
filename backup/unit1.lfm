@@ -569,6 +569,7 @@ object Form1: TForm1
     OnEditing = ShellListView1Editing
     OnKeyDown = ShellListView1KeyDown
     OnMouseDown = ShellListView1MouseDown
+    OnSelectItem = ShellListView1SelectItem
     ObjectTypes = [otFolders, otNonFolders]
     ShellTreeView = ShellTreeView1
   end
