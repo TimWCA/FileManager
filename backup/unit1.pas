@@ -31,7 +31,6 @@ type
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
-    procedure OpenButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure ShellTreeView1Click(Sender: TObject);
@@ -199,21 +198,6 @@ begin
       ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
     except
     end;
-
-end;
-
-procedure TForm1.OpenButtonClick(Sender: TObject);
-begin
-
-  //showmessage(ExtractFileDir(ExtractFileDir(ExtractFileDir(Path))));
-  ShowMessage(ShellListView1.Root + '\' + ExtractFileName(Path));
-  //showmessage(extractfiledir(extractfiledir(path)));
-  try
-    ShellListView1.Root := StatusBar1.SimpleText;
-  except
-    on E: EInvalidPath do
-      ShowMessage('Я ещё не умею открывать файлы :(');
-  end;
 
 end;
 
