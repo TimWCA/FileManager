@@ -47,6 +47,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="FileOpenModule"/>
       </Unit>
+      <Unit>
+        <Filename Value="modules\filesystemmodule.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FileSystemModule"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -57,6 +62,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="modules"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

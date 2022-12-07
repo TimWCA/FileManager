@@ -659,21 +659,26 @@ object Form1: TForm1
       Caption = 'Создать'
       object CleateFolder: TMenuItem
         Caption = 'Папку'
+        OnClick = CleateFolderClick
       end
     end
     object ViewMenuItem: TMenuItem
       Caption = 'Вид'
       object ViewIcon: TMenuItem
         Caption = 'Значки'
+        OnClick = ViewIconClick
       end
       object ViewList: TMenuItem
         Caption = 'Список'
+        OnClick = ViewListClick
       end
       object ViewReport: TMenuItem
         Caption = 'Таблица'
+        OnClick = ViewReportClick
       end
       object ViewSmallIcon: TMenuItem
         Caption = 'Мелкие значки'
+        OnClick = ViewSmallIconClick
       end
     end
   end

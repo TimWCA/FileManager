@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi;
+  StdCtrls, ExtCtrls, Buttons, Menus, FileCtrl, LazUTF8, ShellApi;
 
 type
 
@@ -30,6 +30,7 @@ type
     StatusBar1: TStatusBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
+    procedure CleateFolderClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
@@ -62,7 +63,7 @@ var
   Path, OldName: string;
 
 implementation
-
+uses FileSystemModule;
 {$R *.lfm}
 
 { TForm1 }
@@ -260,6 +261,13 @@ begin
     except
     end;
 
+end;
+
+(* Меню "Создать" *)
+// Создание папки
+procedure TForm1.CleateFolderClick(Sender: TObject);
+begin
+  FileSystemModule.CleateFolder(ShellListView1.Root);
 end;
 
 procedure TForm1.GoButtonClick(Sender: TObject);
