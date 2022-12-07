@@ -267,7 +267,7 @@ end;
 // Создание папки
 procedure TForm1.CleateFolderClick(Sender: TObject);
 begin
-  FileSystemModule.CreateFolder(TShellListView.Root);
+  FileSystemModule.CleateFolder(ShellListView1.Root);
 end;
 
 procedure TForm1.GoButtonClick(Sender: TObject);

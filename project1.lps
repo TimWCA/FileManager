@@ -8,7 +8,6 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <CursorPos X="33" Y="13"/>
         <UsageCount Value="58"/>
@@ -21,8 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="250"/>
-        <CursorPos X="28" Y="270"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="37" Y="9"/>
         <UsageCount Value="58"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,6 +33,15 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="21"/>
         <UsageCount Value="55"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\filesystemmodule.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FileSystemModule"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="39" Y="10"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\shellctrls.pas"/>
@@ -77,17 +85,8 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit>
-      <Unit>
-        <Filename Value="modules\filesystemmodule.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="FileSystemModule"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="39" Y="10"/>
-        <UsageCount Value="21"/>
-        <Loaded Value="True"/>
-      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="252" Column="165" TopLine="228"/>
@@ -175,10 +174,6 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="50" Column="7" TopLine="34"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="43" Column="53" TopLine="55"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
