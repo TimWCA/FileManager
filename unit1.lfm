@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 266
-  Height = 653
+  Height = 645
   Top = 105
   Width = 992
   Caption = 'Файловый менеджер'
-  ClientHeight = 653
+  ClientHeight = 625
   ClientWidth = 992
   Icon.Data = {
     3E42000000000100010040400000010020002842000016000000280000004000
@@ -539,6 +539,7 @@ object Form1: TForm1
     0000000000000000000000000000000000000000000000000000000000000000
     0000
   }
+  Menu = MainMenu1
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
   Position = poScreenCenter
@@ -546,7 +547,7 @@ object Form1: TForm1
   object ShellTreeView1: TShellTreeView
     Left = 16
     Height = 560
-    Top = 56
+    Top = 33
     Width = 192
     FileSortType = fstNone
     TabOrder = 0
@@ -557,7 +558,7 @@ object Form1: TForm1
   object ShellListView1: TShellListView
     Left = 224
     Height = 558
-    Top = 56
+    Top = 33
     Width = 752
     Color = clDefault
     MultiSelect = True
@@ -576,125 +577,108 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23
-    Top = 630
+    Top = 602
     Width = 992
     Panels = <>
   end
-  object ToolBar1: TToolBar
-    Left = 0
-    Height = 28
-    Top = 7
-    Width = 992
-    BorderSpacing.Top = 7
-    ButtonHeight = 24
-    ButtonWidth = 23
-    Caption = 'ToolBar1'
-    EdgeBorders = []
-    Indent = 7
-    TabOrder = 3
-    object ViewComboBox: TComboBox
-      Left = 93
-      Height = 23
-      Top = 0
-      Width = 100
-      ItemHeight = 15
-      Items.Strings = (
-        'Значки'
-        'Список'
-        'Таблица'
-        'Мелкие значки'
-      )
-      OnSelect = ViewComboBoxSelect
-      TabOrder = 0
-      Text = 'Вид'
-    end
-    object Label1: TLabel
-      Left = 67
-      Height = 15
-      Top = 0
-      Width = 26
-      Caption = 'Вид: '
-      ParentColor = False
-    end
-    object OpenButton: TButton
-      Left = 193
-      Height = 24
-      Top = 0
-      Width = 75
-      Caption = 'Открыть'
-      OnClick = OpenButtonClick
-      TabOrder = 1
-    end
-    object ArrowBack: TImage
-      Left = 7
-      Height = 24
-      Hint = 'Назад (ALT + СТРЕЛКА ВЛЕВО)'
-      Top = 0
-      Width = 30
-      Center = True
-      OnClick = ArrowBackClick
-      ParentShowHint = False
-      Picture.Data = {
-        1754506F727461626C654E6574776F726B477261706869639501000089504E47
-        0D0A1A0A0000000D49484452000000300000003008060000005702F987000000
-        097048597300000B1300000B1301009A9C1800000147494441546881ED97B94A
-        044114456F266228EECB0C82606266E22F885BE8F28582B1A0CC179889B8E006
-        220622068EE086A0B7680666A0AAAB1B6BE6B6F20E9CB8CF6D1AAA1A300CC330
-        0CE37F304877E80B3DA28BDA9C720C218BFE6EF381F62BA38A32428FD119DF72
-        5ED85588517A027FFC131DD0A5C519A367F0C77FD0655D5A9CBC37EFE2D77569
-        7126E925C2F16BBAB43853C88F5FD5A5C599A65708C7AFE8D2E2D4E835FCF1EF
-        A878BC7BF3B7F0C777CB57BA87EC93FD35FB3D8E6FF720C580A6704033C58086
-        704023C580197ADFE3F037649F6E3DC500C72CBD0B3CEC8B6EA77A5037A9D31B
-        84476CC9CA4A5043F83C7023367569C5C93B91DD880D5D5A71DC01131AF1898A
-        DF465BC42E764BBAB4E24CD00BF8473CE28FFC138FD373F847CC09BB4AE1FED0
-        4ED119EF0EBF3E65545986E92E7DA68774419B63188661188661549E1F33D419
-        ED1315E0540000000049454E44AE426082
-      }
-      Proportional = True
-      ShowHint = True
-    end
-    object ArrowForward: TImage
-      Left = 37
-      Height = 24
-      Hint = 'Вперед (ALT + СТРЕЛКА ВПРАВО)'
-      Top = 0
-      Width = 30
-      Center = True
-      OnClick = ArrowForwardClick
-      ParentShowHint = False
-      Picture.Data = {
-        1754506F727461626C654E6574776F726B477261706869637C01000089504E47
-        0D0A1A0A0000000D49484452000000300000003008060000005702F987000000
-        097048597300000B1300000B1301009A9C180000012E494441546881ED98BD4E
-        024118456F69AC210A5208DAF100BC012A568ABC24349450424F6808411B500B
-        1B1A20D1A885DC0D21C164661D9259BE59F39DE4B4706ED8657F004551144551
-        FE3F153AA44BDAA219D99CFD38A26FF467C7113D918CDA87327EC76F1DD353C1
-        2E678EE91CE611139A974B73E7967EC23CE2919EC9A5B97347BF601E31A545B9
-        3477EE611F31434A46D4E937CC239E69492ECD9D07C48FB8904B73A701FB8817
-        7AE9EB8BA20FEAC37EEC26E52B3DF731A077E0F05DBB3E06AC04072C7C0CE808
-        0EE8F818105DEADB38FC2FE1ED1C488A2A7D8739DEEBBF50125CC11E1FFC75E0
-        9A7EC01E1FF495382E7E86C0EF856E608F9F22F013B606FBF3C0132DC8A5FD4D
-        EA9FC8E29E8973825DCEA4FEAD4444F45E6880CDBD4D93666573144551144551
-        942058033C071A04BC7444F10000000049454E44AE426082
-      }
-      Proportional = True
-      ShowHint = True
-    end
-  end
   object PathEdit: TEdit
-    Left = 16
+    Left = 88
     Height = 23
-    Top = 32
-    Width = 880
-    TabOrder = 4
+    Top = 9
+    Width = 808
+    TabOrder = 3
   end
   object GoButton: TButton
     Left = 901
     Height = 25
-    Top = 32
+    Top = 9
     Width = 75
     Caption = 'Перейти'
     OnClick = GoButtonClick
-    TabOrder = 5
+    TabOrder = 4
+  end
+  object ArrowBack: TImage
+    Left = 16
+    Height = 24
+    Hint = 'Назад (ALT + СТРЕЛКА ВЛЕВО)'
+    Top = 9
+    Width = 30
+    Center = True
+    OnClick = ArrowBackClick
+    ParentShowHint = False
+    Picture.Data = {
+      1754506F727461626C654E6574776F726B477261706869639501000089504E47
+      0D0A1A0A0000000D49484452000000300000003008060000005702F987000000
+      097048597300000B1300000B1301009A9C1800000147494441546881ED97B94A
+      044114456F266228EECB0C82606266E22F885BE8F28582B1A0CC179889B8E006
+      220622068EE086A0B7680666A0AAAB1B6BE6B6F20E9CB8CF6D1AAA1A300CC330
+      0CE37F304877E80B3DA28BDA9C720C218BFE6EF381F62BA38A32428FD119DF72
+      5ED85588517A027FFC131DD0A5C519A367F0C77FD0655D5A9CBC37EFE2D77569
+      7126E925C2F16BBAB43853C88F5FD5A5C599A65708C7AFE8D2E2D4E835FCF1EF
+      A878BC7BF3B7F0C777CB57BA87EC93FD35FB3D8E6FF720C580A6704033C58086
+      704023C580197ADFE3F037649F6E3DC500C72CBD0B3CEC8B6EA77A5037A9D31B
+      84476CC9CA4A5043F83C7023367569C5C93B91DD880D5D5A71DC01131AF1898A
+      DF465BC42E764BBAB4E24CD00BF8473CE28FFC138FD373F847CC09BB4AE1FED0
+      4ED119EF0EBF3E65545986E92E7DA68774419B63188661188661549E1F33D419
+      ED1315E0540000000049454E44AE426082
+    }
+    Proportional = True
+    ShowHint = True
+  end
+  object ArrowForward: TImage
+    Left = 48
+    Height = 24
+    Hint = 'Вперед (ALT + СТРЕЛКА ВПРАВО)'
+    Top = 8
+    Width = 30
+    Center = True
+    OnClick = ArrowForwardClick
+    ParentShowHint = False
+    Picture.Data = {
+      1754506F727461626C654E6574776F726B477261706869637C01000089504E47
+      0D0A1A0A0000000D49484452000000300000003008060000005702F987000000
+      097048597300000B1300000B1301009A9C180000012E494441546881ED98BD4E
+      024118456F69AC210A5208DAF100BC012A568ABC24349450424F6808411B500B
+      1B1A20D1A885DC0D21C164661D9259BE59F39DE4B4706ED8657F004551144551
+      FE3F153AA44BDAA219D99CFD38A26FF467C7113D918CDA87327EC76F1DD353C1
+      2E678EE91CE611139A974B73E7967EC23CE2919EC9A5B97347BF601E31A545B9
+      3477EE611F31434A46D4E937CC239E69492ECD9D07C48FB8904B73A701FB8817
+      7AE9EB8BA20FEAC37EEC26E52B3DF731A077E0F05DBB3E06AC04072C7C0CE808
+      0EE8F818105DEADB38FC2FE1ED1C488A2A7D8739DEEBBF50125CC11E1FFC75E0
+      9A7EC01E1FF495382E7E86C0EF856E608F9F22F013B606FBF3C0132DC8A5FD4D
+      EA9FC8E29E8973825DCEA4FEAD4444F45E6880CDBD4D93666573144551144551
+      942058033C071A04BC7444F10000000049454E44AE426082
+    }
+    Proportional = True
+    ShowHint = True
+  end
+  object MainMenu1: TMainMenu
+    Left = 48
+    Top = 73
+    object CreateMenuItem: TMenuItem
+      Caption = 'Создать'
+      object CleateFolder: TMenuItem
+        Caption = 'Папку'
+      end
+    end
+    object ViewMenuItem: TMenuItem
+      Caption = 'Вид'
+      object ViewIcon: TMenuItem
+        Caption = 'Значки'
+        OnClick = ViewIconClick
+      end
+      object ViewList: TMenuItem
+        Caption = 'Список'
+        OnClick = ViewListClick
+      end
+      object ViewReport: TMenuItem
+        Caption = 'Таблица'
+        OnClick = ViewReportClick
+      end
+      object ViewSmallIcon: TMenuItem
+        Caption = 'Мелкие значки'
+        OnClick = ViewSmallIconClick
+      end
+    end
   end
 end

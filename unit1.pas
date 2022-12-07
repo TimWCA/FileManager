@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, ExtCtrls, Buttons, LazUTF8, ShellApi;
+  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi;
 
 type
 
@@ -14,25 +14,27 @@ type
 
   TForm1 = class(TForm)
     GoButton: TButton;
+    MainMenu1: TMainMenu;
+    CreateMenuItem: TMenuItem;
+    ViewMenuItem: TMenuItem;
+    CleateFolder: TMenuItem;
+    ViewIcon: TMenuItem;
+    ViewList: TMenuItem;
+    ViewReport: TMenuItem;
+    ViewSmallIcon: TMenuItem;
     PathEdit: TEdit;
-    OpenButton: TButton;
-    ViewComboBox: TComboBox;
     ArrowBack: TImage;
     ArrowForward: TImage;
-    Label1: TLabel;
     ShellListView1: TShellListView;
     ShellTreeView1: TShellTreeView;
     StatusBar1: TStatusBar;
-    ToolBar1: TToolBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
-    procedure OpenButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
-      Selected: Boolean);
+      Selected: boolean);
     procedure ShellTreeView1Click(Sender: TObject);
     procedure ShellTreeView1SelectionChanged(Sender: TObject);
-    procedure ViewComboBoxSelect(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -45,6 +47,10 @@ type
       Shift: TShiftState);
     procedure ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure ViewIconClick(Sender: TObject);
+    procedure ViewListClick(Sender: TObject);
+    procedure ViewReportClick(Sender: TObject);
+    procedure ViewSmallIconClick(Sender: TObject);
   private
 
   public
@@ -66,18 +72,6 @@ procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
 begin
   StatusBar1.SimpleText := ShellListView1.GetPathFromItem(Item);
   Path := ShellListView1.GetPathFromItem(Item);
-end;
-
-procedure TForm1.ViewComboBoxSelect(Sender: TObject);
-begin
-
-  case ViewComboBox.ItemIndex of
-    0: ShellListView1.ViewStyle := vsIcon;
-    1: ShellListView1.ViewStyle := vsList;
-    2: ShellListView1.ViewStyle := vsReport;
-    3: ShellListView1.ViewStyle := vsSmallIcon;
-  end;
-
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -211,19 +205,26 @@ begin
 
 end;
 
-procedure TForm1.OpenButtonClick(Sender: TObject);
+(* Меню "Вид" *)
+// Значки
+procedure TForm1.ViewIconClick(Sender: TObject);
 begin
-
-  //showmessage(ExtractFileDir(ExtractFileDir(ExtractFileDir(Path))));
-  ShowMessage(ShellListView1.Root + '\' + ExtractFileName(Path));
-  //showmessage(extractfiledir(extractfiledir(path)));
-  try
-    ShellListView1.Root := StatusBar1.SimpleText;
-  except
-    on E: EInvalidPath do
-      ShowMessage('Я ещё не умею открывать файлы :(');
-  end;
-
+  ShellListView1.ViewStyle := vsIcon;
+end;
+// Список
+procedure TForm1.ViewListClick(Sender: TObject);
+begin
+  ShellListView1.ViewStyle := vsList;
+end;
+// Таблица
+procedure TForm1.ViewReportClick(Sender: TObject);
+begin
+  ShellListView1.ViewStyle := vsReport;
+end;
+// Мелкие значки
+procedure TForm1.ViewSmallIconClick(Sender: TObject);
+begin
+  ShellListView1.ViewStyle := vsSmallIcon;
 end;
 
 procedure TForm1.ShellTreeView1Click(Sender: TObject);
