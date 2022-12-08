@@ -8,8 +8,9 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="33" Y="13"/>
+        <CursorPos X="15" Y="13"/>
         <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit>
@@ -38,7 +39,6 @@
         <Filename Value="modules\filesystemmodule.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FileSystemModule"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="8"/>
         <CursorPos X="35" Y="37"/>

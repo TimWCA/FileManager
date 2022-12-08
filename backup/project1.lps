@@ -40,8 +40,8 @@
         <UnitName Value="FileSystemModule"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="82" Y="38"/>
+        <TopLine Value="8"/>
+        <CursorPos X="35" Y="37"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit>
