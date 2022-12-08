@@ -10,6 +10,7 @@ uses
 procedure CleateFolder(Root: string);
 implementation
 
+// Создаёт папки
 procedure CleateFolder(Root: string);
 var
   i: integer = 1;

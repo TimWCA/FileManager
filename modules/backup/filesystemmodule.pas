@@ -3,12 +3,14 @@ unit FileSystemModule;
 {$mode ObjFPC}{$H+}
 
 interface
-procedure CleateFolder(Root: string);
+
 uses
   Classes, SysUtils;
 
+procedure CleateFolder(Root: string);
 implementation
 
+// Создаёт файлы и папки
 procedure CleateFolder(Root: string);
 var
   i: integer = 1;
