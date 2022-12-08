@@ -254,7 +254,7 @@ end;
 (* Удалить *)
 procedure TForm1.DeleteMenuItemClick(Sender: TObject);
 begin
-  FileSystemModule.DeleteToRecycleBin(Path);
+  FileSystemModule.Delete(Path);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"
