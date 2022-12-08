@@ -26,4 +26,4 @@ jobs:
         include-packages: "Synapse 40.1"
         with-cache: true
     - name: Build the Main Application
-      run: lazbuild -B "src/lazaruswithgithubactions.lpi"
+      run: lazbuild -B "project1.lpi"
