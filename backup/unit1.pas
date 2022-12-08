@@ -249,6 +249,7 @@ begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
 end;
 
+// Выполняется при нажатии кнопки "Перейти"
 procedure TForm1.GoButtonClick(Sender: TObject);
 begin
   try

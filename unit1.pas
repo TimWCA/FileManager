@@ -16,6 +16,7 @@ type
     GoButton: TButton;
     MainMenu1: TMainMenu;
     CreateMenuItem: TMenuItem;
+    DeleteMenuItem: TMenuItem;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
     ViewIcon: TMenuItem;
