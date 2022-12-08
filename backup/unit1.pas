@@ -16,6 +16,7 @@ type
     GoButton: TButton;
     MainMenu1: TMainMenu;
     CreateMenuItem: TMenuItem;
+    DeleteMenuItem: TMenuItem;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
     ViewIcon: TMenuItem;
@@ -31,6 +32,7 @@ type
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
     procedure CleateFolderClick(Sender: TObject);
+    procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
@@ -247,6 +249,12 @@ end;
 procedure TForm1.CleateFolderClick(Sender: TObject);
 begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
+end;
+
+(* Удалить *)
+procedure TForm1.DeleteMenuItemClick(Sender: TObject);
+begin
+  FileSystemModule.DeleteToRecycleBin(Path);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"

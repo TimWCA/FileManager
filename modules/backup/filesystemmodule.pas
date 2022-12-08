@@ -5,12 +5,14 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, Dialogs, Controls, FileUtil, LazUTF8, ShellApi;
 
 procedure CleateFolder(Root: string);
+procedure Delete(Path: string);
+
 implementation
 
-// Создаёт файлы и папки
+// Создаёт папки
 procedure CleateFolder(Root: string);
 var
   i: integer = 1;
@@ -22,10 +24,20 @@ begin
     while DirectoryExists(Root + '\Новая папка (' +
         IntToStr(i) + ')') do
       Inc(i);
-    CreateDir(Root + '\Новая папка (' +
-      IntToStr(i) + ')');
+    CreateDir(Root + '\Новая папка (' + IntToStr(i) + ')');
+  end;
+end;
+
+procedure Delete(Path: string);
+begin
+  if MessageDlg('Удалить?',
+    'Вы уверены, что хотите удалить этот файл?',
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    if DirectoryExists(Path) then
+      ShellExecute(0, nil, PChar('cmd.exe'), PChar('/s /q rd "' +
+        UTF8ToWinCP(Path) + '"'), nil, 0);
   end;
 end;
 
 end.
-

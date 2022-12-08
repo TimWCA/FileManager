@@ -683,7 +683,8 @@ object Form1: TForm1
     end
     object DeleteMenuItem: TMenuItem
       Caption = 'Удалить'
-      ShortCut = 46
+      ShortCut = 8238
+      OnClick = DeleteMenuItemClick
     end
   end
 end
