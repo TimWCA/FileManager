@@ -35,7 +35,6 @@ type
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
     procedure ShellTreeView1Click(Sender: TObject);
-    procedure ShellTreeView1SelectionChanged(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -60,70 +59,128 @@ type
 
 var
   Form1: TForm1;
-  Path, OldName: string;
+  Path: string; // Путь выделенного объекта
+  OldName: string; // Старое имя при переименовании
+
+procedure goBack;
+procedure goFwd;
 
 implementation
+
 uses FileSystemModule;
+
 {$R *.lfm}
 
 { TForm1 }
 
+// Выполняется при переходе на папку назад
+procedure goBack;
+begin
+  try
+    Form1.ShellListView1.Root := ExtractFileDir(Form1.ShellListView1.Root);
+    Form1.PathEdit.Text := Form1.ShellListView1.Root;
+  except
+  end;
+end;
+
+// Выполняется при переходе на папку вперёд
+procedure goFwd;
+begin
+  if (ExtractFileExt(Path) = '') then
+    try
+      Form1.ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
+      Form1.PathEdit.Text := Form1.ShellListView1.Root;
+    except
+    end;
+end;
+
+// Выполняется при выделении объека в ShellListView
 procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
   Selected: boolean);
 begin
-  StatusBar1.SimpleText := ShellListView1.GetPathFromItem(Item);
   Path := ShellListView1.GetPathFromItem(Item);
+  // Путь выделенного объекта
+  StatusBar1.SimpleText := Path;
 end;
 
+// Выполняется при нажатии на форме компбинаций клавиш...
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
 
-  {Alt + Стрелка влево}
+  // ...Alt + Стрелка влево
   if ((key = $25) and (ssAlt in Shift)) then
-    try
-      ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
-      PathEdit.Text := ShellListView1.Root;
-    except
-    end;
+    goBack;
 
-  {Alt + Стрелка вправо}
+  // ...Alt + Стрелка вправо
   if ((key = $27) and (ssAlt in Shift)) then
-  begin
-    if (ExtractFileExt(Path) = '') then
-      try
-        ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
-        PathEdit.Text := ShellListView1.Root;
-      except
-      end;
-  end;
+    goFwd;
 
 end;
 
+// Выполняется при нажатии на форме кнопок мыши...
 procedure TForm1.FormMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 begin
 
-  {Mouse XButton1}
+  // ...Mouse XButton1
   if (Button = mbExtra2) then
-  begin
-    if (ExtractFileExt(Path) = '') then
-      try
-        ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
-        PathEdit.Text := ShellListView1.Root;
-      except
-      end;
-  end;
+    goBack;
 
-  {Mouse XButton2}
+  // ...Mouse XButton2
   if (Button = mbExtra1) then
-    try
-      ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
-      PathEdit.Text := ShellListView1.Root;
-    except
-    end;
+    goFwd;
 
 end;
 
+// Выполняется при нажатии на ShellListView компбинаций клавиш...
+procedure TForm1.ShellListView1KeyDown(Sender: TObject; var Key: word;
+  Shift: TShiftState);
+begin
+
+  // ...Alt + Стрелка влево
+  if ((key = $25) and (ssAlt in Shift)) then
+    goBack;
+
+  // ...Alt + Стрелка вправо
+  if ((key = $27) and (ssAlt in Shift)) then
+    goFwd;
+
+end;
+
+// Выполняется при нажатии на форме кнопок мыши...
+procedure TForm1.ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
+begin
+
+  // ...Mouse XButton1
+  if (Button = mbExtra2) then
+    goBack;
+
+  // ...Mouse XButton2
+  if (Button = mbExtra1) then
+    goFwd;
+
+end;
+
+// Выполняется при нажатии на кнопку-стрелку "Назад"
+procedure TForm1.ArrowBackClick(Sender: TObject);
+begin
+  goBack;
+end;
+
+// Выполняется при нажатии на кнопку-стрелку "Вперёд"
+procedure TForm1.ArrowForwardClick(Sender: TObject);
+begin
+  goFwd;
+end;
+
+// Выполняется при нажатии на элемент ShellTreeView
+procedure TForm1.ShellTreeView1Click(Sender: TObject);
+begin
+  PathEdit.Text := ShellListView1.Root;
+end;
+
+// Выполняется при двойном клике по ShellListView
 procedure TForm1.ShellListView1DblClick(Sender: TObject);
 begin
 
@@ -142,15 +199,7 @@ begin
 
 end;
 
-procedure TForm1.ShellListView1Edited(Sender: TObject; Item: TListItem;
-  var AValue: string);
-begin
-
-  {Переименование}
-  RenameFile(ExtractFilePath(Path) + OldName, ExtractFilePath(Path) + AValue);
-
-end;
-
+// Выполняется во время изменения имени объекта ShellListView
 procedure TForm1.ShellListView1Editing(Sender: TObject; Item: TListItem;
   var AllowEdit: boolean);
 begin
@@ -160,53 +209,18 @@ begin
 
 end;
 
-procedure TForm1.ShellListView1KeyDown(Sender: TObject; var Key: word;
-  Shift: TShiftState);
+// Выполняется после изменения имени объекта ShellListView
+procedure TForm1.ShellListView1Edited(Sender: TObject; Item: TListItem;
+  var AValue: string);
 begin
 
-  {Alt + Стрелка влево}
-  if ((key = $25) and (ssAlt in Shift)) then
-    try
-      ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
-    except
-    end;
-
-  {Alt + Стрелка вправо}
-  if ((key = $27) and (ssAlt in Shift)) then
-  begin
-    if (ExtractFileExt(Path) = '') then
-      try
-        ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
-      except
-      end;
-  end;
-
-end;
-
-procedure TForm1.ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: integer);
-begin
-
-  {Mouse XButton1}
-  if (Button = mbExtra2) then
-  begin
-    if (ExtractFileExt(Path) = '') then
-      try
-        ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
-      except
-      end;
-  end;
-
-  {Mouse XButton2}
-  if (Button = mbExtra1) then
-    try
-      ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
-    except
-    end;
+  {Переименование}
+  RenameFile(ExtractFilePath(Path) + OldName, ExtractFilePath(Path) + AValue);
 
 end;
 
 (* Меню "Вид" *)
+
 // Значки
 procedure TForm1.ViewIconClick(Sender: TObject);
 begin
@@ -228,41 +242,6 @@ begin
   ShellListView1.ViewStyle := vsSmallIcon;
 end;
 
-procedure TForm1.ShellTreeView1Click(Sender: TObject);
-begin
-  PathEdit.Text := ShellListView1.Root;
-end;
-
-procedure TForm1.ShellTreeView1SelectionChanged(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.ArrowBackClick(Sender: TObject);
-begin
-
-  {Стрелка назад}
-  try
-    ShellListView1.Root := ExtractFileDir(ShellListView1.Root);
-    PathEdit.Text := ShellListView1.Root;
-  except
-  end;
-
-end;
-
-procedure TForm1.ArrowForwardClick(Sender: TObject);
-begin
-
-  {Стрелка вперед}
-  if (ExtractFileExt(Path) = '') then
-    try
-      ShellListView1.Root := ExtractFileDir(ExtractFileDir(Path));
-      PathEdit.Text := ShellListView1.Root;
-    except
-    end;
-
-end;
-
 (* Меню "Создать" *)
 // Создание папки
 procedure TForm1.CleateFolderClick(Sender: TObject);
@@ -270,6 +249,7 @@ begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
 end;
 
+// Выполняется при нажатии кнопки "Перейти"
 procedure TForm1.GoButtonClick(Sender: TObject);
 begin
   try
