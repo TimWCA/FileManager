@@ -21,6 +21,6 @@ jobs:
       with:
         lazarus-version: ${{ matrix.lazarus-versions }}
         include-packages: "Synapse 40.1"
-        with-cache: true
+        #with-cache: true
     - name: Build the Main Application
       run: lazbuild -B "project1.lpi"
