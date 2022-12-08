@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [windows-latest]
-        lazarus-versions: [2.2.4]
+        lazarus-versions: [stable]
     steps:
     - name: Checkout source code
       uses: actions/checkout@v2
