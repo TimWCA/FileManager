@@ -5,7 +5,7 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls;
+  Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil;
 
 procedure CleateFolder(Root: string);
 procedure Delete(Path: string);
@@ -30,8 +30,12 @@ end;
 
 procedure Delete(Path: string);
 begin
-  if MessageDlg('Удалить?', 'Вы уверены, что хотите удалить этот файл?',
+  if MessageDlg('Удалить?',
+    'Вы уверены, что хотите удалить этот файл?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if DirectoryExists(Path) then
+      DeleteDirectory(Path, False)
+    else
       DeleteFile(Path);
 end;
 
