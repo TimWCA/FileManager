@@ -75,7 +75,7 @@ var
   Form1: TForm1;
   Path: string; // Путь выделенного объекта
   OldName: string; // Старое имя при переименовании
-  FwdPath: string; // Путь для кнопки вперёд
+  FwdPathArray: array of string; // Путь для кнопки вперёд
 
 procedure goBack;
 procedure goFwd;
@@ -92,7 +92,8 @@ uses FileSystemModule;
 procedure goBack;
 begin
   try
-    FwdPath := Form1.ShellListView1.Root;
+    SetLength(FwdPathArray, Length(FwdPathArray) + 1);
+    FwdPathArray[Length(FwdPathArray) - 1] := Form1.ShellListView1.Root;
     Form1.ShellListView1.Root := ExtractFileDir(Form1.ShellListView1.Root);
     Form1.PathEdit.Text := Form1.ShellListView1.Root;
   except
@@ -104,7 +105,10 @@ procedure goFwd;
 begin
   if (ExtractFileExt(Path) = '') then
     try
-      Form1.ShellListView1.Root := FwdPath;
+      if Length(FwdPathArray) - 1 > 0 then
+        Form1.ShellListView1.Root := FwdPathArray[Length(FwdPathArray) - 1];
+      SetLength(FwdPathArray, Length(FwdPathArray) - 1);
+      Form1.PathEdit.Text := Form1.ShellListView1.Root;
     except
     end;
 end;
