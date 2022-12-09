@@ -558,7 +558,7 @@ object Form1: TForm1
   object ShellListView1: TShellListView
     Left = 224
     Height = 558
-    Top = 33
+    Top = 32
     Width = 752
     Color = clDefault
     MultiSelect = True
@@ -660,6 +660,30 @@ object Form1: TForm1
       object CleateFolder: TMenuItem
         Caption = 'Папку'
         OnClick = CleateFolderClick
+      end
+      object CleateAccess: TMenuItem
+        Caption = 'Microsoft Access База данных'
+        OnClick = CleateAccessClick
+      end
+      object CleatePicture: TMenuItem
+        Caption = 'Точечный рисунок'
+        OnClick = CleatePictureClick
+      end
+      object CleateWord: TMenuItem
+        Caption = 'Документ Microsoft Word'
+        OnClick = CleateWordClick
+      end
+      object CleatePowerPoint: TMenuItem
+        Caption = 'Презентация Microsoft PowerPoint'
+        OnClick = CleatePowerPointClick
+      end
+      object CleateText: TMenuItem
+        Caption = 'Текстовый документ'
+        OnClick = CleateTextClick
+      end
+      object CleateExcel: TMenuItem
+        Caption = 'Лист Microsoft Excel'
+        OnClick = CleateExcelClick
       end
     end
     object ViewMenuItem: TMenuItem
