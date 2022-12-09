@@ -5,7 +5,7 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil, Forms, ShellCtrls;
+  Classes, SysUtils, Dialogs, Controls, ShellApi, LazUTF8;
 
 procedure CleateFolder(Root: string);
 procedure Delete(Path: string);
@@ -28,16 +28,16 @@ begin
   end;
 end;
 
-// Удаляет файлы и папки
 procedure Delete(Path: string);
 begin
   if MessageDlg('Удалить?',
     'Вы уверены, что хотите удалить этот файл?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    if DirectoryExists(Path) then
-      DeleteDirectory(Path, False)
-    else
-      DeleteFile(Path);
+    //if DirectoryExists(Path) then
+      ShellExecute(0, nil, PChar('cmd'),
+        PChar(UTF8toWinCP('/с rd /S /Q' + '"C:\Users\Timofei\Desktop\Новая папка"')), nil, 0)
+    //else
+    //  DeleteFile(Path);
 end;
 
 end.
