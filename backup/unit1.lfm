@@ -683,6 +683,7 @@ object Form1: TForm1
       end
       object CleateExcel: TMenuItem
         Caption = 'Лист Microsoft Excel'
+        OnClick = CleateExcelClick
       end
     end
     object ViewMenuItem: TMenuItem
