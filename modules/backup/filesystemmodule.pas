@@ -8,14 +8,20 @@ uses
   Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil, Forms, ShellCtrls;
 
 procedure CleateFolder(Root: string);
+procedure CleateAccess(Root: string);
+procedure CleatePicture(Root: string);
+procedure CleateWord(Root: string);
+procedure CleatePowerPoint(Root: string);
+procedure CleateText(Root: string);
 procedure Delete(Path: string);
+procedure Refresh(ShellListView: TShellListView);
 
 implementation
 
-// Создаёт папки
+// Создаёт Папки
 procedure CleateFolder(Root: string);
 var
-  i: integer = 1;
+  i: integer = 2;
 begin
   if not DirectoryExists(Root + '\Новая папка') then
     CreateDir(Root + '\Новая папка')
@@ -25,6 +31,126 @@ begin
         IntToStr(i) + ')') do
       Inc(i);
     CreateDir(Root + '\Новая папка (' + IntToStr(i) + ')');
+  end;
+end;
+
+// Создает Microsoft Access Базы данных
+procedure CleateAccess(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Microsoft Access База данных' + '.accdb') then
+  begin
+    AssignFile(f, Root + '\Microsoft Access База данных' + '.accdb');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Microsoft Access База данных (' +
+        IntToStr(i) + ')' + '.accdb') do
+      Inc(i);
+    AssignFile(f, Root + '\Microsoft Access База данных (' +
+      IntToStr(i) + ')' + '.accdb');
+    Rewrite(f);
+    CloseFile(f);
+  end;
+end;
+
+// Создает Точечные рисунки
+procedure CleatePicture(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Новый точечный рисунок' + '.bmp') then
+  begin
+    AssignFile(f, Root + '\Новый точечный рисунок' + '.bmp');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Новый точечный рисунок (' +
+        IntToStr(i) + ')' + '.bmp') do
+      Inc(i);
+    AssignFile(f, Root + '\Новый точечный рисунок (' +
+      IntToStr(i) + ')' + '.bmp');
+    Rewrite(f);
+    CloseFile(f);
+  end;
+end;
+
+// Создает Документы Microsoft Word
+procedure CleateWord(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Документ Microsoft Word' + '.docx') then
+  begin
+    AssignFile(f, Root + '\Документ Microsoft Word' + '.docx');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Документ Microsoft Word (' +
+        IntToStr(i) + ')' + '.docx') do
+      Inc(i);
+    AssignFile(f, Root + '\Документ Microsoft Word (' +
+      IntToStr(i) + ')' + '.docx');
+    Rewrite(f);
+    CloseFile(f);
+  end;
+end;
+
+// Создает Презентации Microsoft PowerPoint
+procedure CleatePowerPoint(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Презентация Microsoft PowerPoint' + '.pptx') then
+  begin
+    AssignFile(f, Root + '\Презентация Microsoft PowerPoint' + '.pptx');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Презентация Microsoft PowerPoint (' +
+        IntToStr(i) + ')' + '.pptx') do
+      Inc(i);
+    AssignFile(f, Root + '\Презентация Microsoft PowerPoint (' +
+      IntToStr(i) + ')' + '.pptx');
+    Rewrite(f);
+    CloseFile(f);
+  end;
+end;
+
+// Создает Текстовые документы
+procedure CleateText(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Новый текстовый документ' + '.txt') then
+  begin
+    AssignFile(f, Root + '\Новый текстовый документ' + '.txt');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Новый текстовый документ (' +
+        IntToStr(i) + ')' + '.txt') do
+      Inc(i);
+    AssignFile(f, Root + '\Новый текстовый документ (' +
+      IntToStr(i) + ')' + '.txt');
+    Rewrite(f);
+    CloseFile(f);
   end;
 end;
 
@@ -38,6 +164,16 @@ begin
       DeleteDirectory(Path, False)
     else
       DeleteFile(Path);
+end;
+
+// Обновляет содержимое ShellListView
+procedure Refresh(ShellListView: TShellListView);
+var
+  tempPath: string;
+begin
+  tempPath := ShellListView.Root;
+  ShellListView.Root := '';
+  ShellListView.Root := tempPath;
 end;
 
 end.

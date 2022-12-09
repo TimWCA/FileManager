@@ -17,6 +17,12 @@ type
     MainMenu1: TMainMenu;
     CreateMenuItem: TMenuItem;
     DeleteMenuItem: TMenuItem;
+    CleatePicture: TMenuItem;
+    CleateWord: TMenuItem;
+    CleatePowerPoint: TMenuItem;
+    CleateText: TMenuItem;
+    CleateExcel: TMenuItem;
+    CleateAccess: TMenuItem;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
     ViewIcon: TMenuItem;
@@ -31,7 +37,13 @@ type
     StatusBar1: TStatusBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
+    procedure CleateAccessClick(Sender: TObject);
+    procedure CleateExcelClick(Sender: TObject);
     procedure CleateFolderClick(Sender: TObject);
+    procedure CleatePictureClick(Sender: TObject);
+    procedure CleatePowerPointClick(Sender: TObject);
+    procedure CleateTextClick(Sender: TObject);
+    procedure CleateWordClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
@@ -245,10 +257,52 @@ begin
 end;
 
 (* Меню "Создать" *)
-// Создание папки
+// Создание Папки
 procedure TForm1.CleateFolderClick(Sender: TObject);
 begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Microsoft Access Базы данных
+procedure TForm1.CleateAccessClick(Sender: TObject);
+begin
+  FileSystemModule.CleateAccess(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Точечного рисунка
+procedure TForm1.CleatePictureClick(Sender: TObject);
+begin
+  FileSystemModule.CleatePicture(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Документа Microsoft Word
+procedure TForm1.CleateWordClick(Sender: TObject);
+begin
+  FileSystemModule.CleateWord(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Презентации Microsoft PowerPoint
+procedure TForm1.CleatePowerPointClick(Sender: TObject);
+begin
+  FileSystemModule.CleatePowerPoint(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Текстового документа
+procedure TForm1.CleateTextClick(Sender: TObject);
+begin
+  FileSystemModule.CleateText(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание Листа Microsoft Excel
+procedure TForm1.CleateExcelClick(Sender: TObject);
+begin
+  FileSystemModule.CleateExcel(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
