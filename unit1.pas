@@ -249,12 +249,14 @@ end;
 procedure TForm1.CleateFolderClick(Sender: TObject);
 begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
 end;
 
 (* Удалить *)
 procedure TForm1.DeleteMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Delete(Path);
+  FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"

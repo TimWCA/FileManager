@@ -66,6 +66,7 @@ var
 
 procedure goBack;
 procedure goFwd;
+procedure Refresh;
 
 implementation
 
@@ -94,6 +95,16 @@ begin
       Form1.PathEdit.Text := Form1.ShellListView1.Root;
     except
     end;
+end;
+
+// Обновляет содержимое ShellListView
+procedure Refresh;
+var
+  tempPath: string;
+begin
+  tempPath := Form1.ShellListView1.Root;
+  Form1.ShellListView1.Root := '';
+  Form1.ShellListView1.Root := tempPath;
 end;
 
 // Выполняется при выделении объека в ShellListView
@@ -249,12 +260,14 @@ end;
 procedure TForm1.CleateFolderClick(Sender: TObject);
 begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
+  Refresh;
 end;
 
 (* Удалить *)
 procedure TForm1.DeleteMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Delete(Path);
+  Refresh;
 end;
 
 // Выполняется при нажатии кнопки "Перейти"
