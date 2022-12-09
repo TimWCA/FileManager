@@ -16,6 +16,8 @@ procedure CleateText(Root: string);
 procedure CleateExcel(Root: string);
 procedure Delete(Path: string);
 procedure Refresh(ShellListView: TShellListView);
+procedure Copy(PathFrom: string; PathTo: String);
+procedure Copy(PathFromArray: array of string; PathTo: string);
 
 implementation
 
@@ -199,6 +201,25 @@ begin
   tempPath := ShellListView.Root;
   ShellListView.Root := '';
   ShellListView.Root := tempPath;
+end;
+
+procedure Copy(PathFrom: String; PathTo:String);
+var
+  i: integer = 2;
+begin
+  if not FileExists(PathTo + ExtractFileName(PathFrom)) then
+    CopyFile(PathFrom, PathTo + ExtractFileName(PathFrom))
+  else
+  begin
+    while FileExists(PathTo + ExtractFileName(PathFrom) + inttostr(i)) do
+      Inc(i);
+    CopyFile(PathFrom, PathTo + ExtractFileName(PathFrom) + inttostr(i));
+  end;
+end;
+
+procedure Copy(PathFromArray: array of string; PathTo: string);
+begin
+
 end;
 
 end.

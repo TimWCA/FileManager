@@ -23,6 +23,8 @@ type
     CleateText: TMenuItem;
     CleateExcel: TMenuItem;
     CleateAccess: TMenuItem;
+    CopyMenuItem: TMenuItem;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
     ViewIcon: TMenuItem;
@@ -44,6 +46,7 @@ type
     procedure CleatePowerPointClick(Sender: TObject);
     procedure CleateTextClick(Sender: TObject);
     procedure CleateWordClick(Sender: TObject);
+    procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
@@ -107,7 +110,8 @@ begin
     try
       if Length(FwdPathArray) - 1 > 0 then
         Form1.ShellListView1.Root := FwdPathArray[Length(FwdPathArray) - 1];
-      SetLength(FwdPathArray, Length(FwdPathArray) - 1);
+      if Length(FwdPathArray) - 1 >= 0 then
+        SetLength(FwdPathArray, Length(FwdPathArray) - 1);
       Form1.PathEdit.Text := Form1.ShellListView1.Root;
     except
     end;
@@ -316,6 +320,14 @@ procedure TForm1.DeleteMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Delete(Path);
   FileSystemModule.Refresh(ShellListView1);
+end;
+
+(* Копировать *)
+procedure TForm1.CopyMenuItemClick(Sender: TObject);
+begin
+  if SelectDirectoryDialog1.Execute then
+    FileSystemModule.Copy(Path, SelectDirectoryDialog1.FileName);
+    //Form1.Caption := SelectDirectoryDialog1.FileName;
 end;
 
 // Выполняется при нажатии кнопки "Перейти"

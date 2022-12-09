@@ -546,8 +546,8 @@ object Form1: TForm1
   LCLVersion = '2.2.4.0'
   object ShellTreeView1: TShellTreeView
     Left = 16
-    Height = 560
-    Top = 33
+    Height = 558
+    Top = 32
     Width = 192
     FileSortType = fstNone
     TabOrder = 0
@@ -710,5 +710,13 @@ object Form1: TForm1
       ShortCut = 8238
       OnClick = DeleteMenuItemClick
     end
+    object CopyMenuItem: TMenuItem
+      Caption = 'Копировать'
+      OnClick = CopyMenuItemClick
+    end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Left = 123
+    Top = 208
   end
 end

@@ -13,8 +13,11 @@ procedure CleatePicture(Root: string);
 procedure CleateWord(Root: string);
 procedure CleatePowerPoint(Root: string);
 procedure CleateText(Root: string);
+procedure CleateExcel(Root: string);
 procedure Delete(Path: string);
 procedure Refresh(ShellListView: TShellListView);
+procedure Copy(PathFrom: string; PathTo: String);
+procedure Copy(PathFromArray: array of string; PathTo: string);
 
 implementation
 
@@ -154,6 +157,30 @@ begin
   end;
 end;
 
+// Создает Листы Microsoft Excel
+procedure CleateExcel(Root: string);
+var
+  f: TextFile;
+  i: integer = 2;
+begin
+  if not FileExists(Root + '\Лист Microsoft Excel' + '.xlsx') then
+  begin
+    AssignFile(f, Root + '\Лист Microsoft Excel' + '.xlsx');
+    Rewrite(f);
+    CloseFile(f);
+  end
+  else
+  begin
+    while FileExists(Root + '\Лист Microsoft Excel (' +
+        IntToStr(i) + ')' + '.xlsx') do
+      Inc(i);
+    AssignFile(f, Root + '\Лист Microsoft Excel (' +
+      IntToStr(i) + ')' + '.xlsx');
+    Rewrite(f);
+    CloseFile(f);
+  end;
+end;
+
 // Удаляет файлы и папки
 procedure Delete(Path: string);
 begin
@@ -176,4 +203,19 @@ begin
   ShellListView.Root := tempPath;
 end;
 
+procedure Copy(PathFrom: String; PathTo:String);
+var
+  i: integer = 2;
+begin
+  if not FileExists(PathTo + ExtractFileName(PathFrom)) then
+    CopyFile(PathFrom, PathTo + ExtractFileName(PathFrom))
+  else
+  begin
+    while FileExists(PathTo + ExtractFileName(PathFrom) + inttostr(i)) do
+      Inc(i);
+    CopyFile(PathFrom, PathTo + ExtractFileName(PathFrom) + inttostr(i));
+  end;
+end;
+
+procedure Copy(PathFromArray: array of string; PathTo: string);
 end.
