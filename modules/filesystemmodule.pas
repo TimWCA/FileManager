@@ -5,10 +5,11 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil;
+  Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil, Forms, ShellCtrls;
 
 procedure CleateFolder(Root: string);
 procedure Delete(Path: string);
+procedure Refresh(ShellListView: TShellListView);
 
 implementation
 
@@ -28,6 +29,7 @@ begin
   end;
 end;
 
+// Удаляет файлы и папки
 procedure Delete(Path: string);
 begin
   if MessageDlg('Удалить?',
@@ -37,6 +39,15 @@ begin
       DeleteDirectory(Path, False)
     else
       DeleteFile(Path);
+end;
+
+// Обновляет содержимое ShellListView
+procedure Refresh(ShellListView: TShellListView);
+var tempPath: string;
+begin
+  tempPath := ShellListView.Root;
+  ShellListView.Root := '';
+  ShellListView.Root := tempPath;
 end;
 
 end.
