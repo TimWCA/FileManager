@@ -324,10 +324,18 @@ end;
 
 (* Копировать *)
 procedure TForm1.CopyMenuItemClick(Sender: TObject);
+var
+  i: integer;
+  FilesList: TStringList;
 begin
+  FilesList := TStringList.Create;
+  for i := 0 to ShellListView1.Items.Count - 1 do
+  begin
+    if ShellListView1.Items[i].Selected then
+      FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
+  end;
   if SelectDirectoryDialog1.Execute then
-    FileSystemModule.Copy(Path, SelectDirectoryDialog1.FileName + '\');
-    //Form1.Caption := SelectDirectoryDialog1.FileName;
+    FileSystemModule.Copy(FilesList, SelectDirectoryDialog1.FileName);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"
