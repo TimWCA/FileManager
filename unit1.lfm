@@ -706,7 +706,7 @@ object Form1: TForm1
       end
     end
     object CutMenuItem: TMenuItem
-      Caption = 'Вырезать'
+      Caption = 'Переместить'
       OnClick = CutMenuItemClick
     end
     object CopyMenuItem: TMenuItem
