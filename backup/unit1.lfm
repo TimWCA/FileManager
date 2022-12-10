@@ -705,14 +705,18 @@ object Form1: TForm1
         OnClick = ViewSmallIconClick
       end
     end
-    object DeleteMenuItem: TMenuItem
-      Caption = 'Удалить'
-      ShortCut = 8238
-      OnClick = DeleteMenuItemClick
+    object CutMenuItem: TMenuItem
+      Caption = 'Вырезать'
+      OnClick = CutMenuItemClick
     end
     object CopyMenuItem: TMenuItem
       Caption = 'Копировать'
       OnClick = CopyMenuItemClick
+    end
+    object DeleteMenuItem: TMenuItem
+      Caption = 'Удалить'
+      ShortCut = 8238
+      OnClick = DeleteMenuItemClick
     end
   end
   object SelectDirectoryDialog1: TSelectDirectoryDialog
