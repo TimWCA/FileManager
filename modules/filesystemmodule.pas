@@ -5,8 +5,8 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls, ShellApi, LazFileUtils, FileUtil,
-  Forms, ShellCtrls;
+  Classes, SysUtils, Dialogs, Controls, ShellCtrls, LazFileUtils, FileUtil,
+  Forms;
 
 procedure CleateFolder(Root: string);
 procedure CleateAccess(Root: string);
@@ -15,9 +15,10 @@ procedure CleateWord(Root: string);
 procedure CleatePowerPoint(Root: string);
 procedure CleateText(Root: string);
 procedure CleateExcel(Root: string);
+procedure Cut(PathFromList: TStringList; PathTo: string);
+procedure Copy(PathFromList: TStringList; PathTo: string);
 procedure Delete(Path: string);
 procedure Refresh(ShellListView: TShellListView);
-procedure Copy(PathFromList: TStringList; PathTo: string);
 
 implementation
 
@@ -182,6 +183,48 @@ begin
   end;
 end;
 
+// Вырезает файлы
+procedure Cut(PathFromList: TStringList; PathTo: string);
+var
+  i: integer;
+  j: integer = 2;
+begin
+  for i := 0 to PathFromList.Count - 1 do
+    if not FileExists(PathTo + '\' + ExtractFileName(PathFromList[i])) then
+      RenameFileUTF8(PathFromList[i], PathTo + '\' + ExtractFileName(PathFromList[i]))
+    else
+    begin
+      while FileExists(PathTo + '\' + ExtractFileName(
+          LazFileUtils.ExtractFileNameWithoutExt(PathFromList[i])) +
+          ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i])) do
+        Inc(j);
+      RenameFile(PathFromList[i], PathTo + '\' +
+        ExtractFileName(LazFileUtils.ExtractFileNameWithoutExt(PathFromList[i])) +
+        ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i]));
+    end;
+end;
+
+// Копирует файлы
+procedure Copy(PathFromList: TStringList; PathTo: string);
+var
+  i: integer;
+  j: integer = 2;
+begin
+  for i := 0 to PathFromList.Count - 1 do
+    if not FileExists(PathTo + '\' + ExtractFileName(PathFromList[i])) then
+      CopyFile(PathFromList[i], PathTo + '\' + ExtractFileName(PathFromList[i]))
+    else
+    begin
+      while FileExists(PathTo + '\' + ExtractFileName(
+          LazFileUtils.ExtractFileNameWithoutExt(PathFromList[i])) +
+          ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i])) do
+        Inc(j);
+      CopyFile(PathFromList[i], PathTo + '\' +
+        ExtractFileName(LazFileUtils.ExtractFileNameWithoutExt(PathFromList[i])) +
+        ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i]));
+    end;
+end;
+
 // Удаляет файлы и папки
 procedure Delete(Path: string);
 begin
@@ -202,27 +245,6 @@ begin
   tempPath := ShellListView.Root;
   ShellListView.Root := '';
   ShellListView.Root := tempPath;
-end;
-
-// Копирует файлы
-procedure Copy(PathFromList: TStringList; PathTo: string);
-var
-  i: integer;
-  j: integer = 2;
-begin
-  for i := 0 to PathFromList.Count - 1 do
-    if not FileExists(PathTo + '\' + ExtractFileName(PathFromList[i])) then
-      CopyFile(PathFromList[i], PathTo + '\' + ExtractFileName(PathFromList[i]))
-    else
-    begin
-      while FileExists(PathTo + '\' +
-          ExtractFileName(ExtractFileNameWithoutExt(PathFromList[i])) +
-          ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i])) do
-        Inc(j);
-      CopyFile(PathFromList[i], PathTo + '\' +
-        ExtractFileName(ExtractFileNameWithoutExt(PathFromList[i])) +
-        ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i]));
-    end;
 end;
 
 end.
