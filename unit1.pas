@@ -23,6 +23,8 @@ type
     CleateText: TMenuItem;
     CleateExcel: TMenuItem;
     CleateAccess: TMenuItem;
+    CopyMenuItem: TMenuItem;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
     ViewIcon: TMenuItem;
@@ -44,6 +46,7 @@ type
     procedure CleatePowerPointClick(Sender: TObject);
     procedure CleateTextClick(Sender: TObject);
     procedure CleateWordClick(Sender: TObject);
+    procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
@@ -317,6 +320,22 @@ procedure TForm1.DeleteMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Delete(Path);
   FileSystemModule.Refresh(ShellListView1);
+end;
+
+(* Копировать *)
+procedure TForm1.CopyMenuItemClick(Sender: TObject);
+var
+  i: integer;
+  FilesList: TStringList;
+begin
+  FilesList := TStringList.Create;
+  for i := 0 to ShellListView1.Items.Count - 1 do
+  begin
+    if ShellListView1.Items[i].Selected then
+      FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
+  end;
+  if SelectDirectoryDialog1.Execute then
+    FileSystemModule.Copy(FilesList, SelectDirectoryDialog1.FileName);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"

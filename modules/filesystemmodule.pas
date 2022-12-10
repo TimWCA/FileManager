@@ -5,7 +5,8 @@ unit FileSystemModule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls, ShellApi, FileUtil, Forms, ShellCtrls;
+  Classes, SysUtils, Dialogs, Controls, ShellApi, LazFileUtils, FileUtil,
+  Forms, ShellCtrls;
 
 procedure CleateFolder(Root: string);
 procedure CleateAccess(Root: string);
@@ -16,6 +17,7 @@ procedure CleateText(Root: string);
 procedure CleateExcel(Root: string);
 procedure Delete(Path: string);
 procedure Refresh(ShellListView: TShellListView);
+procedure Copy(PathFromList: TStringList; PathTo: string);
 
 implementation
 
@@ -137,7 +139,8 @@ var
   f: TextFile;
   i: integer = 2;
 begin
-  if not FileExists(Root + '\Новый текстовый документ' + '.txt') then
+  if not FileExists(Root + '\Новый текстовый документ' +
+    '.txt') then
   begin
     AssignFile(f, Root + '\Новый текстовый документ' + '.txt');
     Rewrite(f);
@@ -169,11 +172,11 @@ begin
   end
   else
   begin
-    while FileExists(Root + '\Лист Microsoft Excel (' +
-        IntToStr(i) + ')' + '.xlsx') do
+    while FileExists(Root + '\Лист Microsoft Excel (' + IntToStr(i) +
+        ')' + '.xlsx') do
       Inc(i);
-    AssignFile(f, Root + '\Лист Microsoft Excel (' +
-      IntToStr(i) + ')' + '.xlsx');
+    AssignFile(f, Root + '\Лист Microsoft Excel (' + IntToStr(i) +
+      ')' + '.xlsx');
     Rewrite(f);
     CloseFile(f);
   end;
@@ -199,6 +202,27 @@ begin
   tempPath := ShellListView.Root;
   ShellListView.Root := '';
   ShellListView.Root := tempPath;
+end;
+
+// Копирует файлы
+procedure Copy(PathFromList: TStringList; PathTo: string);
+var
+  i: integer;
+  j: integer = 2;
+begin
+  for i := 0 to PathFromList.Count - 1 do
+    if not FileExists(PathTo + '\' + ExtractFileName(PathFromList[i])) then
+      CopyFile(PathFromList[i], PathTo + '\' + ExtractFileName(PathFromList[i]))
+    else
+    begin
+      while FileExists(PathTo + '\' +
+          ExtractFileName(ExtractFileNameWithoutExt(PathFromList[i])) +
+          ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i])) do
+        Inc(j);
+      CopyFile(PathFromList[i], PathTo + '\' +
+        ExtractFileName(ExtractFileNameWithoutExt(PathFromList[i])) +
+        ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i]));
+    end;
 end;
 
 end.
