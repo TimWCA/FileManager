@@ -17,6 +17,7 @@ procedure CleateText(Root: string);
 procedure CleateExcel(Root: string);
 procedure Cut(PathFromList: TStringList; PathTo: string);
 procedure Copy(PathFromList: TStringList; PathTo: string);
+procedure CopyDir(PathFrom: string; PathTo: string);
 procedure Delete(Path: string);
 procedure Refresh(ShellListView: TShellListView);
 
@@ -211,6 +212,9 @@ var
   j: integer = 2;
 begin
   for i := 0 to PathFromList.Count - 1 do
+    if DirectoryExists(PathFromList[i]) then
+      CopyDir(PathFromList[i], PathTo)
+    else
     if not FileExists(PathTo + '\' + ExtractFileName(PathFromList[i])) then
       CopyFile(PathFromList[i], PathTo + '\' + ExtractFileName(PathFromList[i]))
     else
@@ -223,6 +227,23 @@ begin
         ExtractFileName(LazFileUtils.ExtractFileNameWithoutExt(PathFromList[i])) +
         ' (' + IntToStr(j) + ')' + ExtractFileExt(PathFromList[i]));
     end;
+end;
+
+// Копирует одну папку
+procedure CopyDir(PathFrom: string; PathTo: string);
+var
+  j: integer = 2;
+begin
+  if not DirectoryExists(PathTo + '\' + ExtractFileName(PathFrom)) then
+    CopyDirTree(PathFrom, PathTo + '\' + ExtractFileName(PathFrom))
+  else
+  begin
+    while DirectoryExists(PathTo + '\' + ExtractFileName(PathFrom) +
+        ' (' + IntToStr(j) + ')') do
+      Inc(j);
+    CopyDirTree(PathFrom, PathTo + '\' + ExtractFileName(PathFrom) +
+      ' (' + IntToStr(j) + ')');
+  end;
 end;
 
 // Удаляет файлы и папки
