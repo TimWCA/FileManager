@@ -229,12 +229,12 @@ begin
     end;
 end;
 
+// Копирует одну папку
 procedure CopyDir(PathFrom: string; PathTo: string);
 var
   j: integer = 2;
 begin
   if not DirectoryExists(PathTo + '\' + ExtractFileName(PathFrom)) then
-    //ShowMessage(PathTo + '\' + ExtractFileName(PathFrom))
     CopyDirTree(PathFrom, PathTo + '\' + ExtractFileName(PathFrom))
   else
   begin
