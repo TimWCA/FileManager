@@ -735,22 +735,33 @@ object Form1: TForm1
       end
       object CreateAccessPopup: TMenuItem
         Caption = 'Microsoft Access База данных'
+        OnClick = CleateAccessClick
       end
       object CreatePicturePupup: TMenuItem
         Caption = 'Точечный рисунок'
+        OnClick = CleatePictureClick
       end
       object CreateWordPopup: TMenuItem
         Caption = 'Документ Microsoft Word'
+        OnClick = CleateWordClick
       end
       object CreatePowerPointPopup: TMenuItem
         Caption = 'Презентация Microsoft PowerPoint'
+        OnClick = CleatePowerPointClick
       end
       object CreateTextPopup: TMenuItem
         Caption = 'Текстовый документ'
+        OnClick = CleateTextClick
       end
       object CreateExcelPopup: TMenuItem
         Caption = 'Лист Microsoft Excel'
+        OnClick = CleateExcelClick
       end
+    end
+    object RefreshPopupMenuItem: TMenuItem
+      Caption = 'Обновить'
+      ShortCut = 116
+      OnClick = RefreshPopupMenuItemClick
     end
   end
 end

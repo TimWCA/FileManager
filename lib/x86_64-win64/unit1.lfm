@@ -658,33 +658,33 @@ object Form1: TForm1
     Top = 73
     object CreateMenuItem: TMenuItem
       Caption = 'Создать'
-      object CleateFolder: TMenuItem
+      object CreateFolder: TMenuItem
         Caption = 'Папку'
-        OnClick = CleateFolderClick
+        OnClick = CreateFolderClick
       end
-      object CleateAccess: TMenuItem
+      object CreateAccess: TMenuItem
         Caption = 'Microsoft Access База данных'
-        OnClick = CleateAccessClick
+        OnClick = CreateAccessClick
       end
-      object CleatePicture: TMenuItem
+      object CreatePicture: TMenuItem
         Caption = 'Точечный рисунок'
-        OnClick = CleatePictureClick
+        OnClick = CreatePictureClick
       end
-      object CleateWord: TMenuItem
+      object CreateWord: TMenuItem
         Caption = 'Документ Microsoft Word'
-        OnClick = CleateWordClick
+        OnClick = CreateWordClick
       end
-      object CleatePowerPoint: TMenuItem
+      object CreatePowerPoint: TMenuItem
         Caption = 'Презентация Microsoft PowerPoint'
-        OnClick = CleatePowerPointClick
+        OnClick = CreatePowerPointClick
       end
-      object CleateText: TMenuItem
+      object CreateText: TMenuItem
         Caption = 'Текстовый документ'
-        OnClick = CleateTextClick
+        OnClick = CreateTextClick
       end
-      object CleateExcel: TMenuItem
+      object CreateExcel: TMenuItem
         Caption = 'Лист Microsoft Excel'
-        OnClick = CleateExcelClick
+        OnClick = CreateExcelClick
       end
     end
     object ViewMenuItem: TMenuItem
@@ -731,31 +731,31 @@ object Form1: TForm1
       Caption = 'Создать'
       object CreateFolderPopup: TMenuItem
         Caption = 'Папку'
-        OnClick = CleateFolderClick
+        OnClick = CreateFolderClick
       end
       object CreateAccessPopup: TMenuItem
         Caption = 'Microsoft Access База данных'
-        OnClick = CleateAccessClick
+        OnClick = CreateAccessClick
       end
       object CreatePicturePupup: TMenuItem
         Caption = 'Точечный рисунок'
-        OnClick = CleatePictureClick
+        OnClick = CreatePictureClick
       end
       object CreateWordPopup: TMenuItem
         Caption = 'Документ Microsoft Word'
-        OnClick = CleateWordClick
+        OnClick = CreateWordClick
       end
       object CreatePowerPointPopup: TMenuItem
         Caption = 'Презентация Microsoft PowerPoint'
-        OnClick = CleatePowerPointClick
+        OnClick = CreatePowerPointClick
       end
       object CreateTextPopup: TMenuItem
         Caption = 'Текстовый документ'
-        OnClick = CleateTextClick
+        OnClick = CreateTextClick
       end
       object CreateExcelPopup: TMenuItem
         Caption = 'Лист Microsoft Excel'
-        OnClick = CleateExcelClick
+        OnClick = CreateExcelClick
       end
     end
     object RefreshPopupMenuItem: TMenuItem
