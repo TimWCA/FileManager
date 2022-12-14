@@ -25,6 +25,15 @@ type
     CleateAccess: TMenuItem;
     CopyMenuItem: TMenuItem;
     CutMenuItem: TMenuItem;
+    CreatePopupMenuItem: TMenuItem;
+    CreateFolderPopup: TMenuItem;
+    CreateAccessPopup: TMenuItem;
+    CreatePicturePupup: TMenuItem;
+    CreateWordPopup: TMenuItem;
+    CreatePowerPointPopup: TMenuItem;
+    CreateTextPopup: TMenuItem;
+    CreateExcelPopup: TMenuItem;
+    ShellListViewPopup: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;

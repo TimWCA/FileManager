@@ -25,6 +25,16 @@ type
     CleateAccess: TMenuItem;
     CopyMenuItem: TMenuItem;
     CutMenuItem: TMenuItem;
+    CreatePopupMenuItem: TMenuItem;
+    CreateFolderPopup: TMenuItem;
+    CreateAccessPopup: TMenuItem;
+    CreatePicturePupup: TMenuItem;
+    CreateWordPopup: TMenuItem;
+    CreatePowerPointPopup: TMenuItem;
+    CreateTextPopup: TMenuItem;
+    CreateExcelPopup: TMenuItem;
+    RefreshPopupMenuItem: TMenuItem;
+    ShellListViewPopup: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     ViewMenuItem: TMenuItem;
     CleateFolder: TMenuItem;
@@ -51,6 +61,7 @@ type
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
+    procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
     procedure ShellTreeView1Click(Sender: TObject);
@@ -367,6 +378,11 @@ begin
       MessageDlg('Ошибка', 'Некорректный путь!',
         mtError, mbOkCancel, '');
   end;
+end;
+
+procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
+begin
+  FileSystemModule.Refresh(ShellListView1);
 end;
 
 end.
