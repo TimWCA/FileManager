@@ -17,17 +17,44 @@ type
     MainMenu1: TMainMenu;
     CreateMenuItem: TMenuItem;
     DeleteMenuItem: TMenuItem;
-    CleatePicture: TMenuItem;
-    CleateWord: TMenuItem;
-    CleatePowerPoint: TMenuItem;
-    CleateText: TMenuItem;
-    CleateExcel: TMenuItem;
-    CleateAccess: TMenuItem;
+    CreatePicture: TMenuItem;
+    CreateWord: TMenuItem;
+    CreatePowerPoint: TMenuItem;
+    CreateText: TMenuItem;
+    CreateExcel: TMenuItem;
+    CreateAccess: TMenuItem;
     CopyMenuItem: TMenuItem;
     CutMenuItem: TMenuItem;
+    CreatePopupMenuItem: TMenuItem;
+    CreateFolderPopup: TMenuItem;
+    CreateAccessPopup: TMenuItem;
+    CreatePicturePupup: TMenuItem;
+    CreateWordPopup: TMenuItem;
+    CreatePowerPointPopup: TMenuItem;
+    CreateTextPopup: TMenuItem;
+    CreateExcelPopup: TMenuItem;
+    SortPopup: TMenuItem;
+    SortNonePopup: TMenuItem;
+    SortTextPopup: TMenuItem;
+    SortDataPopup: TMenuItem;
+    SortBothPopup: TMenuItem;
+    Separator2: TMenuItem;
+    SortMenuItem: TMenuItem;
+    SortNone: TMenuItem;
+    SortText: TMenuItem;
+    SortData: TMenuItem;
+    SortBoth: TMenuItem;
+    Separator1: TMenuItem;
+    ViewPopupMenuItem: TMenuItem;
+    ViewIconPopup: TMenuItem;
+    ViewListPopup: TMenuItem;
+    ViewReportPopup: TMenuItem;
+    ViewSmallIconPopup: TMenuItem;
+    RefreshPopupMenuItem: TMenuItem;
+    ShellListViewPopup: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     ViewMenuItem: TMenuItem;
-    CleateFolder: TMenuItem;
+    CreateFolder: TMenuItem;
     ViewIcon: TMenuItem;
     ViewList: TMenuItem;
     ViewReport: TMenuItem;
@@ -40,17 +67,18 @@ type
     StatusBar1: TStatusBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
-    procedure CleateAccessClick(Sender: TObject);
-    procedure CleateExcelClick(Sender: TObject);
-    procedure CleateFolderClick(Sender: TObject);
-    procedure CleatePictureClick(Sender: TObject);
-    procedure CleatePowerPointClick(Sender: TObject);
-    procedure CleateTextClick(Sender: TObject);
-    procedure CleateWordClick(Sender: TObject);
+    procedure CreateAccessClick(Sender: TObject);
+    procedure CreateExcelClick(Sender: TObject);
+    procedure CreateFolderClick(Sender: TObject);
+    procedure CreatePictureClick(Sender: TObject);
+    procedure CreatePowerPointClick(Sender: TObject);
+    procedure CreateTextClick(Sender: TObject);
+    procedure CreateWordClick(Sender: TObject);
     procedure CutMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
+    procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
     procedure ShellTreeView1Click(Sender: TObject);
@@ -66,6 +94,10 @@ type
       Shift: TShiftState);
     procedure ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure SortBothClick(Sender: TObject);
+    procedure SortDataClick(Sender: TObject);
+    procedure SortNoneClick(Sender: TObject);
+    procedure SortTextClick(Sender: TObject);
     procedure ViewIconClick(Sender: TObject);
     procedure ViewListClick(Sender: TObject);
     procedure ViewReportClick(Sender: TObject);
@@ -187,6 +219,7 @@ begin
 
 end;
 
+
 // Выполняется при нажатии на кнопку-стрелку "Назад"
 procedure TForm1.ArrowBackClick(Sender: TObject);
 begin
@@ -267,51 +300,74 @@ begin
   ShellListView1.ViewStyle := vsSmallIcon;
 end;
 
+(* Меню "Вид" --> "Сортировать" *)
+
+// Не сортировать
+procedure TForm1.SortNoneClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stNone;
+end;
+// По имени
+procedure TForm1.SortTextClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stText;
+end;
+// По размеру
+procedure TForm1.SortDataClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stData;
+end;
+// По имени и размеру
+procedure TForm1.SortBothClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stBoth;
+end;
+
 (* Меню "Создать" *)
 // Создание Папки
-procedure TForm1.CleateFolderClick(Sender: TObject);
+procedure TForm1.CreateFolderClick(Sender: TObject);
 begin
   FileSystemModule.CleateFolder(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Microsoft Access Базы данных
-procedure TForm1.CleateAccessClick(Sender: TObject);
+procedure TForm1.CreateAccessClick(Sender: TObject);
 begin
   FileSystemModule.CleateAccess(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Точечного рисунка
-procedure TForm1.CleatePictureClick(Sender: TObject);
+procedure TForm1.CreatePictureClick(Sender: TObject);
 begin
   FileSystemModule.CleatePicture(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Документа Microsoft Word
-procedure TForm1.CleateWordClick(Sender: TObject);
+procedure TForm1.CreateWordClick(Sender: TObject);
 begin
   FileSystemModule.CleateWord(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Презентации Microsoft PowerPoint
-procedure TForm1.CleatePowerPointClick(Sender: TObject);
+procedure TForm1.CreatePowerPointClick(Sender: TObject);
 begin
   FileSystemModule.CleatePowerPoint(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Текстового документа
-procedure TForm1.CleateTextClick(Sender: TObject);
+procedure TForm1.CreateTextClick(Sender: TObject);
 begin
   FileSystemModule.CleateText(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Листа Microsoft Excel
-procedure TForm1.CleateExcelClick(Sender: TObject);
+procedure TForm1.CreateExcelClick(Sender: TObject);
 begin
   FileSystemModule.CleateExcel(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
@@ -367,6 +423,11 @@ begin
       MessageDlg('Ошибка', 'Некорректный путь!',
         mtError, mbOkCancel, '');
   end;
+end;
+
+procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
+begin
+  FileSystemModule.Refresh(ShellListView1);
 end;
 
 end.
