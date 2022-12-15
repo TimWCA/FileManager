@@ -33,6 +33,7 @@ type
     CreatePowerPointPopup: TMenuItem;
     CreateTextPopup: TMenuItem;
     CreateExcelPopup: TMenuItem;
+    OpenFilePopupMenuItem: TMenuItem;
     SortPopup: TMenuItem;
     SortNonePopup: TMenuItem;
     SortTextPopup: TMenuItem;
@@ -78,9 +79,11 @@ type
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
+    procedure OpenFilePopupMenuItemClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
+    procedure ShellListViewPopupPopup(Sender: TObject);
     procedure ShellTreeView1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
@@ -158,6 +161,25 @@ begin
   Path := ShellListView1.GetPathFromItem(Item);
   // Путь выделенного объекта
   StatusBar1.SimpleText := Path;
+end;
+
+procedure TForm1.ShellListViewPopupPopup(Sender: TObject);
+begin
+
+  try
+    if (ShellListView1.Selected.Selected) then
+    begin
+      OpenFilePopupMenuItem.Visible := True;
+      OpenFilePopupMenuItem.Enabled := True;
+    end;
+  except
+    on E: EInvalidPath do
+    begin
+      OpenFilePopupMenuItem.Visible := False;
+      OpenFilePopupMenuItem.Enabled := False;
+    end;
+  end;
+
 end;
 
 // Выполняется при нажатии на форме компбинаций клавиш...
@@ -423,6 +445,24 @@ begin
       MessageDlg('Ошибка', 'Некорректный путь!',
         mtError, mbOkCancel, '');
   end;
+end;
+
+procedure TForm1.OpenFilePopupMenuItemClick(Sender: TObject);
+begin
+
+  {Открытие папки}
+  // Надо поискать другой способ для проверки на папку, ИМХО.
+  // Возможна ситуация, что будет файл без расширения.
+  //if (ExtractFileExt(ShellListView1.Selected.Caption) = '') then
+  //begin
+  //  ShellListView1.Root := Path;
+  //  PathEdit.Text := ShellListView1.Root;
+  //end
+  //
+  //{Открытие файлов}
+  //else
+  //  ShellExecute(0, nil, PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
+
 end;
 
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);

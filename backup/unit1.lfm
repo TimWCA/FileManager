@@ -691,18 +691,22 @@ object Form1: TForm1
       Caption = 'Вид'
       object ViewIcon: TMenuItem
         Caption = 'Значки'
+        RadioItem = True
         OnClick = ViewIconClick
       end
       object ViewList: TMenuItem
         Caption = 'Список'
+        RadioItem = True
         OnClick = ViewListClick
       end
       object ViewReport: TMenuItem
         Caption = 'Таблица'
+        RadioItem = True
         OnClick = ViewReportClick
       end
       object ViewSmallIcon: TMenuItem
         Caption = 'Мелкие значки'
+        RadioItem = True
         OnClick = ViewSmallIconClick
       end
       object Separator1: TMenuItem
@@ -712,18 +716,22 @@ object Form1: TForm1
         Caption = 'Сортировка'
         object SortNone: TMenuItem
           Caption = 'Не сортировать'
+          RadioItem = True
           OnClick = SortNoneClick
         end
         object SortText: TMenuItem
           Caption = 'По имени'
+          RadioItem = True
           OnClick = SortTextClick
         end
         object SortData: TMenuItem
           Caption = 'По размеру'
+          RadioItem = True
           OnClick = SortDataClick
         end
         object SortBoth: TMenuItem
           Caption = 'По имени и размеру'
+          RadioItem = True
           OnClick = SortBothClick
         end
       end
@@ -747,8 +755,13 @@ object Form1: TForm1
     Top = 208
   end
   object ShellListViewPopup: TPopupMenu
+    OnPopup = ShellListViewPopupPopup
     Left = 128
     Top = 104
+    object OpenFilePopupMenuItem: TMenuItem
+      Caption = 'Открыть'
+      OnClick = OpenFilePopupMenuItemClick
+    end
     object ViewPopupMenuItem: TMenuItem
       Caption = 'Вид'
       object ViewIconPopup: TMenuItem
