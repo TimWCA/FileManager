@@ -33,6 +33,23 @@ type
     CreatePowerPointPopup: TMenuItem;
     CreateTextPopup: TMenuItem;
     CreateExcelPopup: TMenuItem;
+    SortPopup: TMenuItem;
+    SortNonePopup: TMenuItem;
+    SortTextPopup: TMenuItem;
+    SortDataPopup: TMenuItem;
+    SortBothPopup: TMenuItem;
+    Separator2: TMenuItem;
+    SortMenuItem: TMenuItem;
+    SortNone: TMenuItem;
+    SortText: TMenuItem;
+    SortData: TMenuItem;
+    SortBoth: TMenuItem;
+    Separator1: TMenuItem;
+    ViewPopupMenuItem: TMenuItem;
+    ViewIconPopup: TMenuItem;
+    ViewListPopup: TMenuItem;
+    ViewReportPopup: TMenuItem;
+    ViewSmallIconPopup: TMenuItem;
     RefreshPopupMenuItem: TMenuItem;
     ShellListViewPopup: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
@@ -77,6 +94,10 @@ type
       Shift: TShiftState);
     procedure ShellListView1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure SortBothClick(Sender: TObject);
+    procedure SortDataClick(Sender: TObject);
+    procedure SortNoneClick(Sender: TObject);
+    procedure SortTextClick(Sender: TObject);
     procedure ViewIconClick(Sender: TObject);
     procedure ViewListClick(Sender: TObject);
     procedure ViewReportClick(Sender: TObject);
@@ -198,6 +219,7 @@ begin
 
 end;
 
+
 // Выполняется при нажатии на кнопку-стрелку "Назад"
 procedure TForm1.ArrowBackClick(Sender: TObject);
 begin
@@ -276,6 +298,29 @@ end;
 procedure TForm1.ViewSmallIconClick(Sender: TObject);
 begin
   ShellListView1.ViewStyle := vsSmallIcon;
+end;
+
+(* Меню "Вид" --> "Сортировать" *)
+
+// Не сортировать
+procedure TForm1.SortNoneClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stNone;
+end;
+// По имени
+procedure TForm1.SortTextClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stText;
+end;
+// По размеру
+procedure TForm1.SortDataClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stData;
+end;
+// По имени и размеру
+procedure TForm1.SortBothClick(Sender: TObject);
+begin
+  ShellListView1.SortType := stBoth;
 end;
 
 (* Меню "Создать" *)
