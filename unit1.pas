@@ -33,6 +33,11 @@ type
     CreatePowerPointPopup: TMenuItem;
     CreateTextPopup: TMenuItem;
     CreateExcelPopup: TMenuItem;
+    ViewPopupMenuItem: TMenuItem;
+    ViewIconPopup: TMenuItem;
+    ViewListPopup: TMenuItem;
+    ViewReportPopup: TMenuItem;
+    ViewSmallIconPopup: TMenuItem;
     RefreshPopupMenuItem: TMenuItem;
     ShellListViewPopup: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
