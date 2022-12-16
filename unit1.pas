@@ -445,8 +445,17 @@ end;
 
 (* Удалить *)
 procedure TForm1.DeleteMenuItemClick(Sender: TObject);
+var
+  i: integer;
+  Fileslist: TStringList;
 begin
-  FileSystemModule.Delete(Path);
+  FilesList := TStringList.Create;
+  for i := 0 to ShellListView1.Items.Count - 1 do
+  begin
+    if ShellListView1.Items[i].Selected then
+      FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
+  end;
+  FileSystemModule.Delete(FilesList);
   FileSystemModule.Refresh(ShellListView1);
 end;
 

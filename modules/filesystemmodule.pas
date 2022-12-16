@@ -18,7 +18,7 @@ procedure CreateExcel(Root: string);
 procedure Cut(PathFromList: TStringList; PathTo: string);
 procedure Copy(PathFromList: TStringList; PathTo: string);
 procedure CopyDir(PathFrom: string; PathTo: string);
-procedure Delete(Path: string);
+procedure Delete(PathList: TStringList);
 procedure Refresh(ShellListView: TShellListView);
 
 implementation
@@ -247,15 +247,19 @@ begin
 end;
 
 // Удаляет файлы и папки
-procedure Delete(Path: string);
+procedure Delete(PathList: TStringList);
+var
+  i: integer;
 begin
   if MessageDlg('Удалить?',
-    'Вы уверены, что хотите безвозвратно удалить этот файл (папку)?',
-    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    if DirectoryExists(Path) then
-      DeleteDirectory(Path, False)
+    'Вы уверены, что хотите безвозвратно удалить ' +
+    IntToStr(PathList.Count) + ' файлов (папок)?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrYes then
+    for i := 0 to PathList.Count - 1 do
+    if DirectoryExists(PathList[i]) then
+      DeleteDirectory(PathList[i], False)
     else
-      DeleteFile(Path);
+      DeleteFile(PathList[i]);
 end;
 
 // Обновляет содержимое ShellListView

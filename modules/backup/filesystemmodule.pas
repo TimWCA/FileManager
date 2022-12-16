@@ -8,13 +8,13 @@ uses
   Classes, SysUtils, Dialogs, Controls, ShellCtrls, LazFileUtils, FileUtil,
   Forms;
 
-procedure CleateFolder(Root: string);
-procedure CleateAccess(Root: string);
-procedure CleatePicture(Root: string);
-procedure CleateWord(Root: string);
-procedure CleatePowerPoint(Root: string);
-procedure CleateText(Root: string);
-procedure CleateExcel(Root: string);
+procedure CreateFolder(Root: string);
+procedure CreateAccess(Root: string);
+procedure CreatePicture(Root: string);
+procedure CreateWord(Root: string);
+procedure CreatePowerPoint(Root: string);
+procedure CreateText(Root: string);
+procedure CreateExcel(Root: string);
 procedure Cut(PathFromList: TStringList; PathTo: string);
 procedure Copy(PathFromList: TStringList; PathTo: string);
 procedure CopyDir(PathFrom: string; PathTo: string);
@@ -24,7 +24,7 @@ procedure Refresh(ShellListView: TShellListView);
 implementation
 
 // Создаёт Папки
-procedure CleateFolder(Root: string);
+procedure CreateFolder(Root: string);
 var
   i: integer = 2;
 begin
@@ -40,7 +40,7 @@ begin
 end;
 
 // Создает Microsoft Access Базы данных
-procedure CleateAccess(Root: string);
+procedure CreateAccess(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -64,7 +64,7 @@ begin
 end;
 
 // Создает Точечные рисунки
-procedure CleatePicture(Root: string);
+procedure CreatePicture(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -88,7 +88,7 @@ begin
 end;
 
 // Создает Документы Microsoft Word
-procedure CleateWord(Root: string);
+procedure CreateWord(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -112,7 +112,7 @@ begin
 end;
 
 // Создает Презентации Microsoft PowerPoint
-procedure CleatePowerPoint(Root: string);
+procedure CreatePowerPoint(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -136,7 +136,7 @@ begin
 end;
 
 // Создает Текстовые документы
-procedure CleateText(Root: string);
+procedure CreateText(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -161,7 +161,7 @@ begin
 end;
 
 // Создает Листы Microsoft Excel
-procedure CleateExcel(Root: string);
+procedure CreateExcel(Root: string);
 var
   f: TextFile;
   i: integer = 2;
@@ -247,15 +247,19 @@ begin
 end;
 
 // Удаляет файлы и папки
-procedure Delete(Path: string);
+procedure Delete(PathList: TStringList);
+var
+  i: integer;
 begin
   if MessageDlg('Удалить?',
-    'Вы уверены, что хотите безвозвратно удалить этот файл (папку)?',
-    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    if DirectoryExists(Path) then
-      DeleteDirectory(Path, False)
+    'Вы уверены, что хотите безвозвратно удалить ' +
+    IntToStr(PathList.Count) + ' файлов (папок)?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrYes then
+    for i := 0 to PathList.Count - 1 do
+    if DirectoryExists(PathList[i]) then
+      DeleteDirectory(PathList[i], False)
     else
-      DeleteFile(Path);
+      DeleteFile(PathList[i]);
 end;
 
 // Обновляет содержимое ShellListView
