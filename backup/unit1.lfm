@@ -760,7 +760,8 @@ object Form1: TForm1
     Top = 104
     object OpenFilePopupMenuItem: TMenuItem
       Caption = 'Открыть'
-      OnClick = OpenFilePopupMenuItemClick
+      Visible = False
+      OnClick = ShellListView1DblClick
     end
     object ViewPopupMenuItem: TMenuItem
       Caption = 'Вид'

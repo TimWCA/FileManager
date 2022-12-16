@@ -79,7 +79,6 @@ type
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
-    procedure OpenFilePopupMenuItemClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
@@ -163,14 +162,24 @@ begin
   StatusBar1.SimpleText := Path;
 end;
 
+// Выполняется при появлении контекстного меню
 procedure TForm1.ShellListViewPopupPopup(Sender: TObject);
 begin
 
   try
-    if (ShellListView1.Selected.Selected) then
+    if (ShellListView1.Selected <> nil) then
     begin
       OpenFilePopupMenuItem.Visible := True;
-      OpenFilePopupMenuItem.Enabled := True;
+      ViewPopupMenuItem.Visible := False;
+      CreatePopupMenuItem.Visible := False;
+      RefreshPopupMenuItem.Visible := False;
+    end
+    else
+    begin
+      OpenFilePopupMenuItem.Visible := False;
+      ViewPopupMenuItem.Visible := True;
+      CreatePopupMenuItem.Visible := True;
+      RefreshPopupMenuItem.Visible := True;
     end;
   except
     on E: EInvalidPath do
@@ -445,24 +454,6 @@ begin
       MessageDlg('Ошибка', 'Некорректный путь!',
         mtError, mbOkCancel, '');
   end;
-end;
-
-procedure TForm1.OpenFilePopupMenuItemClick(Sender: TObject);
-begin
-
-  {Открытие папки}
-  // Надо поискать другой способ для проверки на папку, ИМХО.
-  // Возможна ситуация, что будет файл без расширения.
-  if (ExtractFileExt(ShellListView1.Selected.Caption) = '') then
-  begin
-    ShellListView1.Root := Path;
-    PathEdit.Text := ShellListView1.Root;
-  end
-
-  {Открытие файлов}
-  else
-    ShellExecute(0, nil, PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
-
 end;
 
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
