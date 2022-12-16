@@ -176,6 +176,7 @@ begin
       CopyPopupMenuItem.Visible := True;
       DeletePopupMenuItem.Visible := True;
       ViewPopupMenuItem.Visible := False;
+      SortPopupMenuItem.Visible := False;
       CreatePopupMenuItem.Visible := False;
       RefreshPopupMenuItem.Visible := False;
     end
@@ -186,6 +187,7 @@ begin
       CopyPopupMenuItem.Visible := False;
       DeletePopupMenuItem.Visible := False;
       ViewPopupMenuItem.Visible := True;
+      SortPopupMenuItem.Visible := True;
       CreatePopupMenuItem.Visible := True;
       RefreshPopupMenuItem.Visible := True;
     end;
@@ -334,7 +336,7 @@ begin
   ShellListView1.ViewStyle := vsSmallIcon;
 end;
 
-(* Меню "Вид" --> "Сортировать" *)
+(* Меню "Сортировать" *)
 
 // Не сортировать
 procedure TForm1.SortNoneClick(Sender: TObject);
