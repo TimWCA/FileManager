@@ -33,12 +33,15 @@ type
     CreatePowerPointPopup: TMenuItem;
     CreateTextPopup: TMenuItem;
     CreateExcelPopup: TMenuItem;
-    SortPopup: TMenuItem;
-    SortNonePopup: TMenuItem;
-    SortTextPopup: TMenuItem;
-    SortDataPopup: TMenuItem;
-    SortBothPopup: TMenuItem;
-    Separator2: TMenuItem;
+    CutPopupMenuItem: TMenuItem;
+    CopyPopupMenuItem: TMenuItem;
+    DeletePopupMenuItem: TMenuItem;
+    SortNonePopupMenuItem: TMenuItem;
+    SortTextPopupMenuItem: TMenuItem;
+    SortDataPopupMenuItem: TMenuItem;
+    SortBothPopupMenuItem: TMenuItem;
+    SortPopupMenuItem: TMenuItem;
+    OpenPopupMenuItem: TMenuItem;
     SortMenuItem: TMenuItem;
     SortNone: TMenuItem;
     SortText: TMenuItem;
@@ -81,6 +84,7 @@ type
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
+    procedure ShellListViewPopupPopup(Sender: TObject);
     procedure ShellTreeView1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
@@ -158,6 +162,38 @@ begin
   Path := ShellListView1.GetPathFromItem(Item);
   // Путь выделенного объекта
   StatusBar1.SimpleText := Path;
+end;
+
+// Выполняется при появлении контекстного меню
+procedure TForm1.ShellListViewPopupPopup(Sender: TObject);
+begin
+
+  try
+    if (ShellListView1.Selected <> nil) then
+    begin
+      OpenPopupMenuItem.Visible := True;
+      CutPopupMenuItem.Visible := True;
+      CopyPopupMenuItem.Visible := True;
+      DeletePopupMenuItem.Visible := True;
+      ViewPopupMenuItem.Visible := False;
+      SortPopupMenuItem.Visible := False;
+      CreatePopupMenuItem.Visible := False;
+      RefreshPopupMenuItem.Visible := False;
+    end
+    else
+    begin
+      OpenPopupMenuItem.Visible := False;
+      CutPopupMenuItem.Visible := False;
+      CopyPopupMenuItem.Visible := False;
+      DeletePopupMenuItem.Visible := False;
+      ViewPopupMenuItem.Visible := True;
+      SortPopupMenuItem.Visible := True;
+      CreatePopupMenuItem.Visible := True;
+      RefreshPopupMenuItem.Visible := True;
+    end;
+  except
+  end;
+
 end;
 
 // Выполняется при нажатии на форме компбинаций клавиш...
@@ -300,7 +336,7 @@ begin
   ShellListView1.ViewStyle := vsSmallIcon;
 end;
 
-(* Меню "Вид" --> "Сортировать" *)
+(* Меню "Сортировать" *)
 
 // Не сортировать
 procedure TForm1.SortNoneClick(Sender: TObject);
@@ -327,49 +363,49 @@ end;
 // Создание Папки
 procedure TForm1.CreateFolderClick(Sender: TObject);
 begin
-  FileSystemModule.CleateFolder(ShellListView1.Root);
+  FileSystemModule.CreateFolder(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Microsoft Access Базы данных
 procedure TForm1.CreateAccessClick(Sender: TObject);
 begin
-  FileSystemModule.CleateAccess(ShellListView1.Root);
+  FileSystemModule.CreateAccess(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Точечного рисунка
 procedure TForm1.CreatePictureClick(Sender: TObject);
 begin
-  FileSystemModule.CleatePicture(ShellListView1.Root);
+  FileSystemModule.CreatePicture(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Документа Microsoft Word
 procedure TForm1.CreateWordClick(Sender: TObject);
 begin
-  FileSystemModule.CleateWord(ShellListView1.Root);
+  FileSystemModule.CreateWord(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Презентации Microsoft PowerPoint
 procedure TForm1.CreatePowerPointClick(Sender: TObject);
 begin
-  FileSystemModule.CleatePowerPoint(ShellListView1.Root);
+  FileSystemModule.CreatePowerPoint(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Текстового документа
 procedure TForm1.CreateTextClick(Sender: TObject);
 begin
-  FileSystemModule.CleateText(ShellListView1.Root);
+  FileSystemModule.CreateText(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 
 // Создание Листа Microsoft Excel
 procedure TForm1.CreateExcelClick(Sender: TObject);
 begin
-  FileSystemModule.CleateExcel(ShellListView1.Root);
+  FileSystemModule.CreateExcel(ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 

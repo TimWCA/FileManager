@@ -562,6 +562,7 @@ object Form1: TForm1
     Width = 752
     Color = clDefault
     MultiSelect = True
+    PopupMenu = ShellListViewPopup
     SortColumn = 0
     SortType = stData
     TabOrder = 1
@@ -657,56 +658,86 @@ object Form1: TForm1
     Top = 73
     object CreateMenuItem: TMenuItem
       Caption = 'Создать'
-      object CleateFolder: TMenuItem
+      object CreateFolder: TMenuItem
         Caption = 'Папку'
-        OnClick = CleateFolderClick
+        OnClick = CreateFolderClick
       end
-      object CleateAccess: TMenuItem
+      object CreateAccess: TMenuItem
         Caption = 'Microsoft Access База данных'
-        OnClick = CleateAccessClick
+        OnClick = CreateAccessClick
       end
-      object CleatePicture: TMenuItem
+      object CreatePicture: TMenuItem
         Caption = 'Точечный рисунок'
-        OnClick = CleatePictureClick
+        OnClick = CreatePictureClick
       end
-      object CleateWord: TMenuItem
+      object CreateWord: TMenuItem
         Caption = 'Документ Microsoft Word'
-        OnClick = CleateWordClick
+        OnClick = CreateWordClick
       end
-      object CleatePowerPoint: TMenuItem
+      object CreatePowerPoint: TMenuItem
         Caption = 'Презентация Microsoft PowerPoint'
-        OnClick = CleatePowerPointClick
+        OnClick = CreatePowerPointClick
       end
-      object CleateText: TMenuItem
+      object CreateText: TMenuItem
         Caption = 'Текстовый документ'
-        OnClick = CleateTextClick
+        OnClick = CreateTextClick
       end
-      object CleateExcel: TMenuItem
+      object CreateExcel: TMenuItem
         Caption = 'Лист Microsoft Excel'
-        OnClick = CleateExcelClick
+        OnClick = CreateExcelClick
       end
     end
     object ViewMenuItem: TMenuItem
       Caption = 'Вид'
       object ViewIcon: TMenuItem
         Caption = 'Значки'
+        RadioItem = True
         OnClick = ViewIconClick
       end
       object ViewList: TMenuItem
         Caption = 'Список'
+        RadioItem = True
         OnClick = ViewListClick
       end
       object ViewReport: TMenuItem
         Caption = 'Таблица'
+        RadioItem = True
         OnClick = ViewReportClick
       end
       object ViewSmallIcon: TMenuItem
         Caption = 'Мелкие значки'
+        RadioItem = True
         OnClick = ViewSmallIconClick
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object SortMenuItem: TMenuItem
+        Caption = 'Сортировка'
+        object SortNone: TMenuItem
+          Caption = 'Не сортировать'
+          RadioItem = True
+          OnClick = SortNoneClick
+        end
+        object SortText: TMenuItem
+          Caption = 'По имени'
+          RadioItem = True
+          OnClick = SortTextClick
+        end
+        object SortData: TMenuItem
+          Caption = 'По размеру'
+          RadioItem = True
+          OnClick = SortDataClick
+        end
+        object SortBoth: TMenuItem
+          Caption = 'По имени и размеру'
+          RadioItem = True
+          OnClick = SortBothClick
+        end
       end
     end
     object CutMenuItem: TMenuItem
-      Caption = 'Вырезать'
+      Caption = 'Переместить'
       OnClick = CutMenuItemClick
     end
     object CopyMenuItem: TMenuItem
@@ -722,5 +753,101 @@ object Form1: TForm1
   object SelectDirectoryDialog1: TSelectDirectoryDialog
     Left = 123
     Top = 208
+  end
+  object ShellListViewPopup: TPopupMenu
+    OnPopup = ShellListViewPopupPopup
+    Left = 128
+    Top = 104
+    object OpenPopupMenuItem: TMenuItem
+      Caption = 'Открыть'
+      Visible = False
+      OnClick = ShellListView1DblClick
+    end
+    object CutPopupMenuItem: TMenuItem
+      Caption = 'Переместить'
+      OnClick = CutMenuItemClick
+    end
+    object CopyPopupMenuItem: TMenuItem
+      Caption = 'Копировать'
+      OnClick = CopyMenuItemClick
+    end
+    object DeletePopupMenuItem: TMenuItem
+      Caption = 'Удалить'
+      OnClick = DeleteMenuItemClick
+    end
+    object ViewPopupMenuItem: TMenuItem
+      Caption = 'Вид'
+      object ViewIconPopup: TMenuItem
+        Caption = 'Значки'
+        OnClick = ViewIconClick
+      end
+      object ViewListPopup: TMenuItem
+        Caption = 'Список'
+        OnClick = ViewListClick
+      end
+      object ViewReportPopup: TMenuItem
+        Caption = 'Таблица'
+        OnClick = ViewReportClick
+      end
+      object ViewSmallIconPopup: TMenuItem
+        Caption = 'Мелкие значки'
+        OnClick = ViewSmallIconClick
+      end
+    end
+    object SortPopupMenuItem: TMenuItem
+      Caption = 'Сортировка'
+      object SortNonePopupMenuItem: TMenuItem
+        Caption = 'Не сортировать'
+        OnClick = SortNoneClick
+      end
+      object SortTextPopupMenuItem: TMenuItem
+        Caption = 'По имени'
+        OnClick = SortTextClick
+      end
+      object SortDataPopupMenuItem: TMenuItem
+        Caption = 'По размеру'
+        OnClick = SortDataClick
+      end
+      object SortBothPopupMenuItem: TMenuItem
+        Caption = 'По имени и размеру'
+        OnClick = SortBothClick
+      end
+    end
+    object CreatePopupMenuItem: TMenuItem
+      Caption = 'Создать'
+      object CreateFolderPopup: TMenuItem
+        Caption = 'Папку'
+        OnClick = CreateFolderClick
+      end
+      object CreateAccessPopup: TMenuItem
+        Caption = 'Microsoft Access База данных'
+        OnClick = CreateAccessClick
+      end
+      object CreatePicturePupup: TMenuItem
+        Caption = 'Точечный рисунок'
+        OnClick = CreatePictureClick
+      end
+      object CreateWordPopup: TMenuItem
+        Caption = 'Документ Microsoft Word'
+        OnClick = CreateWordClick
+      end
+      object CreatePowerPointPopup: TMenuItem
+        Caption = 'Презентация Microsoft PowerPoint'
+        OnClick = CreatePowerPointClick
+      end
+      object CreateTextPopup: TMenuItem
+        Caption = 'Текстовый документ'
+        OnClick = CreateTextClick
+      end
+      object CreateExcelPopup: TMenuItem
+        Caption = 'Лист Microsoft Excel'
+        OnClick = CreateExcelClick
+      end
+    end
+    object RefreshPopupMenuItem: TMenuItem
+      Caption = 'Обновить'
+      ShortCut = 116
+      OnClick = RefreshPopupMenuItemClick
+    end
   end
 end

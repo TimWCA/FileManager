@@ -250,7 +250,7 @@ end;
 procedure Delete(Path: string);
 begin
   if MessageDlg('Удалить?',
-    'Вы уверены, что хотите удалить этот файл?',
+    'Вы уверены, что хотите безвозвратно удалить этот файл (папку)?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     if DirectoryExists(Path) then
       DeleteDirectory(Path, False)
