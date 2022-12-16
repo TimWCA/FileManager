@@ -167,8 +167,8 @@ end;
 // Выполняется при появлении контекстного меню
 procedure TForm1.ShellListViewPopupPopup(Sender: TObject);
 begin
-
   try
+    // Если выделен файл
     if (ShellListView1.Selected <> nil) then
     begin
       OpenPopupMenuItem.Visible := True;
@@ -180,6 +180,8 @@ begin
       CreatePopupMenuItem.Visible := False;
       RefreshPopupMenuItem.Visible := False;
     end
+
+    // Если не выделен файл
     else
     begin
       OpenPopupMenuItem.Visible := False;
@@ -193,7 +195,6 @@ begin
     end;
   except
   end;
-
 end;
 
 // Выполняется при нажатии на форме компбинаций клавиш...
@@ -444,7 +445,16 @@ end;
 
 (* Удалить *)
 procedure TForm1.DeleteMenuItemClick(Sender: TObject);
+var
+  i: integer;
+  Fileslist: TStringList;
 begin
+  FilesList := TStringList.Create;
+  for i := 0 to ShellListView1.Items.Count - 1 do
+  begin
+    if ShellListView1.Items[i].Selected then
+      FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
+  end;
   FileSystemModule.Delete(Path);
   FileSystemModule.Refresh(ShellListView1);
 end;
