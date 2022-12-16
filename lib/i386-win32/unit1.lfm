@@ -758,9 +758,22 @@ object Form1: TForm1
     OnPopup = ShellListViewPopupPopup
     Left = 128
     Top = 104
-    object OpenFilePopupMenuItem: TMenuItem
+    object OpenPopupMenuItem: TMenuItem
       Caption = 'Открыть'
-      OnClick = OpenFilePopupMenuItemClick
+      Visible = False
+      OnClick = ShellListView1DblClick
+    end
+    object CutPopupMenuItem: TMenuItem
+      Caption = 'Переместить'
+      OnClick = CutMenuItemClick
+    end
+    object CopyPopupMenuItem: TMenuItem
+      Caption = 'Копировать'
+      OnClick = CopyMenuItemClick
+    end
+    object DeletePopupMenuItem: TMenuItem
+      Caption = 'Удалить'
+      OnClick = DeleteMenuItemClick
     end
     object ViewPopupMenuItem: TMenuItem
       Caption = 'Вид'
@@ -780,27 +793,24 @@ object Form1: TForm1
         Caption = 'Мелкие значки'
         OnClick = ViewSmallIconClick
       end
-      object Separator2: TMenuItem
-        Caption = '-'
+    end
+    object SortPopupMenuItem: TMenuItem
+      Caption = 'Сортировка'
+      object SortNonePopupMenuItem: TMenuItem
+        Caption = 'Не сортировать'
+        OnClick = SortNoneClick
       end
-      object SortPopup: TMenuItem
-        Caption = 'Сортировка'
-        object SortNonePopup: TMenuItem
-          Caption = 'Не сортировать'
-          OnClick = SortNoneClick
-        end
-        object SortTextPopup: TMenuItem
-          Caption = 'По имени'
-          OnClick = SortTextClick
-        end
-        object SortDataPopup: TMenuItem
-          Caption = 'По размеру'
-          OnClick = SortDataClick
-        end
-        object SortBothPopup: TMenuItem
-          Caption = 'По имени и размеру'
-          OnClick = SortBothClick
-        end
+      object SortTextPopupMenuItem: TMenuItem
+        Caption = 'По имени'
+        OnClick = SortTextClick
+      end
+      object SortDataPopupMenuItem: TMenuItem
+        Caption = 'По размеру'
+        OnClick = SortDataClick
+      end
+      object SortBothPopupMenuItem: TMenuItem
+        Caption = 'По имени и размеру'
+        OnClick = SortBothClick
       end
     end
     object CreatePopupMenuItem: TMenuItem
