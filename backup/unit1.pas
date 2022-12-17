@@ -82,6 +82,7 @@ type
     procedure CutMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
+    procedure PathEditKeyPress(Sender: TObject; var Key: char);
     procedure PropertiesPopupMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
@@ -179,6 +180,7 @@ begin
       CutPopupMenuItem.Visible := True;
       CopyPopupMenuItem.Visible := True;
       DeletePopupMenuItem.Visible := True;
+      RenamePopupMenuItem.Visible := True;
       ViewPopupMenuItem.Visible := False;
       SortPopupMenuItem.Visible := False;
       CreatePopupMenuItem.Visible := False;
@@ -192,6 +194,7 @@ begin
       CutPopupMenuItem.Visible := False;
       CopyPopupMenuItem.Visible := False;
       DeletePopupMenuItem.Visible := False;
+      RenamePopupMenuItem.Visible := False;
       ViewPopupMenuItem.Visible := True;
       SortPopupMenuItem.Visible := True;
       CreatePopupMenuItem.Visible := True;
@@ -462,6 +465,12 @@ begin
   FileSystemModule.Refresh(ShellListView1);
 end;
 
+(* Переименовать *)
+procedure TForm1.RenamePopupMenuItemClick(Sender: TObject);
+begin
+  ShellListView1.Selected.EditCaption;
+end;
+
 (* Свойства *)
 procedure TForm1.PropertiesPopupMenuItemClick(Sender: TObject);
 var
@@ -494,14 +503,24 @@ begin
   end;
 end;
 
+procedure TForm1.PathEditKeyPress(Sender: TObject; var Key: char);
+begin
+  if Key = #13 then
+  GoButtonClick(Sender);
+  {begin
+    try
+      ShellListView1.Root := PathEdit.Text;
+    except
+      on E: EInvalidPath do
+        MessageDlg('Ошибка', 'Некорректный путь!',
+          mtError, mbOkCancel, '');
+    end;
+  end;}
+end;
+
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Refresh(ShellListView1);
-end;
-
-procedure TForm1.RenamePopupMenuItemClick(Sender: TObject);
-begin
-  ShellListView1.Selected.EditCaption;
 end;
 
 end.
