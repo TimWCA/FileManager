@@ -36,6 +36,7 @@ type
     CutPopupMenuItem: TMenuItem;
     CopyPopupMenuItem: TMenuItem;
     DeletePopupMenuItem: TMenuItem;
+    RenamePopupMenuItem: TMenuItem;
     PropertiesPopupMenuItem: TMenuItem;
     SortNonePopupMenuItem: TMenuItem;
     SortTextPopupMenuItem: TMenuItem;
@@ -84,6 +85,7 @@ type
     procedure PropertiesPopupMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
+    procedure RenamePopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
     procedure ShellListViewPopupPopup(Sender: TObject);
@@ -177,6 +179,7 @@ begin
       CutPopupMenuItem.Visible := True;
       CopyPopupMenuItem.Visible := True;
       DeletePopupMenuItem.Visible := True;
+      RenamePopupMenuItem.Visible := True;
       ViewPopupMenuItem.Visible := False;
       SortPopupMenuItem.Visible := False;
       CreatePopupMenuItem.Visible := False;
@@ -190,6 +193,7 @@ begin
       CutPopupMenuItem.Visible := False;
       CopyPopupMenuItem.Visible := False;
       DeletePopupMenuItem.Visible := False;
+      RenamePopupMenuItem.Visible := False;
       ViewPopupMenuItem.Visible := True;
       SortPopupMenuItem.Visible := True;
       CreatePopupMenuItem.Visible := True;
@@ -458,6 +462,12 @@ begin
   end;
   FileSystemModule.Delete(FilesList);
   FileSystemModule.Refresh(ShellListView1);
+end;
+
+(* Переименовать *)
+procedure TForm1.RenamePopupMenuItemClick(Sender: TObject);
+begin
+  ShellListView1.Selected.EditCaption;
 end;
 
 (* Свойства *)

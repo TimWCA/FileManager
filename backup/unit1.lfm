@@ -775,6 +775,14 @@ object Form1: TForm1
       Caption = 'Удалить'
       OnClick = DeleteMenuItemClick
     end
+    object RenamePopupMenuItem: TMenuItem
+      Caption = 'Переименовать'
+      OnClick = RenamePopupMenuItemClick
+    end
+    object PropertiesPopupMenuItem: TMenuItem
+      Caption = 'Свойства'
+      OnClick = PropertiesPopupMenuItemClick
+    end
     object ViewPopupMenuItem: TMenuItem
       Caption = 'Вид'
       object ViewIconPopup: TMenuItem
@@ -848,10 +856,6 @@ object Form1: TForm1
         Caption = 'Лист Microsoft Excel'
         OnClick = CreateExcelClick
       end
-    end
-    object PropertiesPopupMenuItem: TMenuItem
-      Caption = 'Свойства'
-      OnClick = PropertiesPopupMenuItemClick
     end
   end
 end
