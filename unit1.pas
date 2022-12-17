@@ -283,9 +283,7 @@ begin
   if (ShellListView1.Selected <> nil) then
   begin
     {Открытие папки}
-    // Надо поискать другой способ для проверки на папку, ИМХО.
-    // Возможна ситуация, что будет файл без расширения.
-    if (ExtractFileExt(Path) = '') then
+    if (DirectoryExists(Path)) then
     begin
       ShellListView1.Root := Path;
       PathEdit.Text := ShellListView1.Root;

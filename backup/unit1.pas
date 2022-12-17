@@ -280,20 +280,21 @@ end;
 // Выполняется при двойном клике по ShellListView
 procedure TForm1.ShellListView1DblClick(Sender: TObject);
 begin
-
-  {Открытие папки}
-  // Надо поискать другой способ для проверки на папку, ИМХО.
-  // Возможна ситуация, что будет файл без расширения.
-  if (ExtractFileExt(Path) = '') then
+  if (ShellListView1.Selected <> nil) then
   begin
-    ShellListView1.Root := Path;
-    PathEdit.Text := ShellListView1.Root;
-  end
+    {Открытие папки}
+    // Надо поискать другой способ для проверки на папку, ИМХО.
+    // Возможна ситуация, что будет файл без расширения.
+    if (DirectoryExists(Path)) then
+    begin
+      ShellListView1.Root := Path;
+      PathEdit.Text := ShellListView1.Root;
+    end
 
-  {Открытие файлов}
-  else
-    ShellExecute(0, nil, PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
-
+    {Открытие файлов}
+    else
+      ShellExecute(0, nil, PChar('"' + UTF8ToWinCP(Path) + '"'), nil, nil, 0);
+  end;
 end;
 
 // Выполняется во время изменения имени объекта ShellListView
@@ -471,9 +472,9 @@ begin
   begin
     cbSize := SizeOf(Properties);
     if (ShellListView1.Selected <> nil) then
-      lpFile := PWideChar(WideString(Path)) // путь к папке
+      lpFile := pwidechar(WideString(Path)) // путь к папке
     else
-      lpFile := PWideChar(WideString(ShellListView1.Root)); // путь к папке
+      lpFile := pwidechar(WideString(ShellListView1.Root)); // путь к папке
     nShow := SW_SHOW;
     fMask := SEE_MASK_INVOKEIDLIST;
     lpVerb := 'Properties';
