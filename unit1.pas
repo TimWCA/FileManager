@@ -225,11 +225,11 @@ begin
 
   // ...Mouse XButton1
   if (Button = mbExtra2) then
-    goBack;
+    goFwd;
 
   // ...Mouse XButton2
   if (Button = mbExtra1) then
-    goFwd;
+    goBack;
 
 end;
 
@@ -255,11 +255,11 @@ begin
 
   // ...Mouse XButton1
   if (Button = mbExtra2) then
-    goBack;
+    goFwd;
 
   // ...Mouse XButton2
   if (Button = mbExtra1) then
-    goFwd;
+    goBack;
 
 end;
 
