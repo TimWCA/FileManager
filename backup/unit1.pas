@@ -179,6 +179,7 @@ begin
       CutPopupMenuItem.Visible := True;
       CopyPopupMenuItem.Visible := True;
       DeletePopupMenuItem.Visible := True;
+      RenamePopupMenuItem.Visible := True;
       ViewPopupMenuItem.Visible := False;
       SortPopupMenuItem.Visible := False;
       CreatePopupMenuItem.Visible := False;
@@ -192,6 +193,7 @@ begin
       CutPopupMenuItem.Visible := False;
       CopyPopupMenuItem.Visible := False;
       DeletePopupMenuItem.Visible := False;
+      RenamePopupMenuItem.Visible := False;
       ViewPopupMenuItem.Visible := True;
       SortPopupMenuItem.Visible := True;
       CreatePopupMenuItem.Visible := True;
@@ -222,11 +224,11 @@ begin
 
   // ...Mouse XButton1
   if (Button = mbExtra2) then
-    goBack;
+    goFwd;
 
   // ...Mouse XButton2
   if (Button = mbExtra1) then
-    goFwd;
+    goBack;
 
 end;
 
@@ -252,11 +254,11 @@ begin
 
   // ...Mouse XButton1
   if (Button = mbExtra2) then
-    goBack;
+    goFwd;
 
   // ...Mouse XButton2
   if (Button = mbExtra1) then
-    goFwd;
+    goBack;
 
 end;
 
@@ -462,6 +464,12 @@ begin
   FileSystemModule.Refresh(ShellListView1);
 end;
 
+(* Переименовать *)
+procedure TForm1.RenamePopupMenuItemClick(Sender: TObject);
+begin
+  ShellListView1.Selected.EditCaption;
+end;
+
 (* Свойства *)
 procedure TForm1.PropertiesPopupMenuItemClick(Sender: TObject);
 var
@@ -497,11 +505,6 @@ end;
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
 begin
   FileSystemModule.Refresh(ShellListView1);
-end;
-
-procedure TForm1.RenamePopupMenuItemClick(Sender: TObject);
-begin
-  ShellListView1.Selected.EditCaption;
 end;
 
 end.
