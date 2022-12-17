@@ -587,6 +587,7 @@ object Form1: TForm1
     Height = 23
     Top = 9
     Width = 808
+    OnKeyPress = PathEditKeyPress
     TabOrder = 3
   end
   object GoButton: TButton

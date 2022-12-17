@@ -82,6 +82,7 @@ type
     procedure CutMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
+    procedure PathEditKeyPress(Sender: TObject; var Key: char);
     procedure PropertiesPopupMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
@@ -500,6 +501,12 @@ begin
       MessageDlg('Ошибка', 'Некорректный путь!',
         mtError, mbOkCancel, '');
   end;
+end;
+
+procedure TForm1.PathEditKeyPress(Sender: TObject; var Key: char);
+begin
+  if Key = #13 then
+    GoButtonClick(Sender);
 end;
 
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);
