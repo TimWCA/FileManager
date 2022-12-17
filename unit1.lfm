@@ -813,6 +813,11 @@ object Form1: TForm1
         OnClick = SortBothClick
       end
     end
+    object RefreshPopupMenuItem: TMenuItem
+      Caption = 'Обновить'
+      ShortCut = 116
+      OnClick = RefreshPopupMenuItemClick
+    end
     object CreatePopupMenuItem: TMenuItem
       Caption = 'Создать'
       object CreateFolderPopup: TMenuItem
@@ -844,10 +849,9 @@ object Form1: TForm1
         OnClick = CreateExcelClick
       end
     end
-    object RefreshPopupMenuItem: TMenuItem
-      Caption = 'Обновить'
-      ShortCut = 116
-      OnClick = RefreshPopupMenuItemClick
+    object PropertiesPopupMenuItem: TMenuItem
+      Caption = 'Свойства'
+      OnClick = PropertiesPopupMenuItemClick
     end
   end
 end

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi;
+  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi, Windows;
 
 type
 
@@ -36,6 +36,7 @@ type
     CutPopupMenuItem: TMenuItem;
     CopyPopupMenuItem: TMenuItem;
     DeletePopupMenuItem: TMenuItem;
+    PropertiesPopupMenuItem: TMenuItem;
     SortNonePopupMenuItem: TMenuItem;
     SortTextPopupMenuItem: TMenuItem;
     SortDataPopupMenuItem: TMenuItem;
@@ -80,6 +81,7 @@ type
     procedure CutMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
+    procedure PropertiesPopupMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
@@ -455,8 +457,28 @@ begin
     if ShellListView1.Items[i].Selected then
       FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
   end;
-  FileSystemModule.Delete(Path);
+  FileSystemModule.Delete(FilesList);
   FileSystemModule.Refresh(ShellListView1);
+end;
+
+(* Свойства *)
+procedure TForm1.PropertiesPopupMenuItemClick(Sender: TObject);
+var
+  Properties: SHELLEXECUTEINFOW;
+begin
+  ZeroMemory(@Properties, SizeOf(Properties));
+  with Properties do
+  begin
+    cbSize := SizeOf(Properties);
+    if (ShellListView1.Selected <> nil) then
+      lpFile := PWideChar(WideString(Path)) // путь к папке
+    else
+      lpFile := PWideChar(WideString(ShellListView1.Root)); // путь к папке
+    nShow := SW_SHOW;
+    fMask := SEE_MASK_INVOKEIDLIST;
+    lpVerb := 'Properties';
+  end;
+  ShellExecuteExW(@Properties);
 end;
 
 // Выполняется при нажатии кнопки "Перейти"
