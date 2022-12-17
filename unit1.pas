@@ -292,6 +292,7 @@ begin
     begin
       ShellListView1.Root := Path;
       PathEdit.Text := ShellListView1.Root;
+      StatusBar1.SimpleText := ShellListView1.Root;
     end
 
     {Открытие файлов}
