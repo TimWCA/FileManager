@@ -776,6 +776,11 @@ object Form1: TForm1
       Caption = 'Переместить'
       OnClick = CutMenuItemClick
     end
+    object CopyPathPopupMenuItem: TMenuItem
+      Caption = 'Копировать как путь'
+      ShortCut = 24643
+      OnClick = CopyPathPopupMenuItemClick
+    end
     object CopyPopupMenuItem: TMenuItem
       Caption = 'Копировать'
       OnClick = CopyMenuItemClick
