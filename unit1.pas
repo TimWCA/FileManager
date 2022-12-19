@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ShellCtrls, ComCtrls,
-  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi, Windows;
+  StdCtrls, ExtCtrls, Buttons, Menus, LazUTF8, ShellApi, Windows, Clipbrd;
 
 type
 
@@ -36,6 +36,7 @@ type
     CutPopupMenuItem: TMenuItem;
     CopyPopupMenuItem: TMenuItem;
     DeletePopupMenuItem: TMenuItem;
+    CopyPathPopupMenuItem: TMenuItem;
     RenamePopupMenuItem: TMenuItem;
     PropertiesPopupMenuItem: TMenuItem;
     SortNonePopupMenuItem: TMenuItem;
@@ -72,6 +73,7 @@ type
     StatusBar1: TStatusBar;
     procedure ArrowBackClick(Sender: TObject);
     procedure ArrowForwardClick(Sender: TObject);
+    procedure CopyPathPopupMenuItemClick(Sender: TObject);
     procedure CreateAccessClick(Sender: TObject);
     procedure CreateExcelClick(Sender: TObject);
     procedure CreateFolderClick(Sender: TObject);
@@ -443,6 +445,12 @@ begin
   if SelectDirectoryDialog1.Execute then
     FileSystemModule.Cut(FilesList, SelectDirectoryDialog1.FileName);
   FileSystemModule.Refresh(ShellListView1);
+end;
+
+(* Копировать как путь *)
+procedure TForm1.CopyPathPopupMenuItemClick(Sender: TObject);
+begin
+  Clipboard.AsText := ShellListView1.GetPathFromItem(ShellListView1.Selected);
 end;
 
 (* Копировать *)
