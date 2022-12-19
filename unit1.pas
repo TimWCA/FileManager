@@ -87,6 +87,8 @@ type
     procedure GoButtonClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure RenamePopupMenuItemClick(Sender: TObject);
+    procedure ShellListView1Change(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
     procedure ShellListView1SelectItem(Sender: TObject; Item: TListItem;
       Selected: boolean);
     procedure ShellListViewPopupPopup(Sender: TObject);
@@ -134,6 +136,14 @@ uses FileSystemModule;
 
 { TForm1 }
 
+// Выполняется при изменении содержимого ShellListView
+procedure TForm1.ShellListView1Change(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
+begin
+  StatusBar1.Panels[0].Text :=
+    'Элементов: ' + IntToStr(ShellListView1.Items.Count);
+end;
+
 // Выполняется при переходе на папку назад
 procedure goBack;
 begin
@@ -165,8 +175,8 @@ procedure TForm1.ShellListView1SelectItem(Sender: TObject; Item: TListItem;
   Selected: boolean);
 begin
   Path := ShellListView1.GetPathFromItem(Item);
-  // Путь выделенного объекта
-  StatusBar1.SimpleText := Path;
+  StatusBar1.Panels[1].Text :=
+    'Выбрано ' + IntToStr(ShellListView1.SelCount) + ' элементов';
 end;
 
 // Выполняется при появлении контекстного меню
@@ -292,7 +302,8 @@ begin
     begin
       ShellListView1.Root := Path;
       PathEdit.Text := ShellListView1.Root;
-      StatusBar1.SimpleText := ShellListView1.Root;
+      StatusBar1.Panels[0].Text :=
+        'Элементов: ' + IntToStr(ShellListView1.Items.Count);
     end
 
     {Открытие файлов}
