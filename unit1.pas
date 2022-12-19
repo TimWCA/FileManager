@@ -37,6 +37,8 @@ type
     CopyPopupMenuItem: TMenuItem;
     DeletePopupMenuItem: TMenuItem;
     CopyPathPopupMenuItem: TMenuItem;
+    ReferenceMenuItem: TMenuItem;
+    ProgramMenuItem: TMenuItem;
     RenamePopupMenuItem: TMenuItem;
     PropertiesPopupMenuItem: TMenuItem;
     SortNonePopupMenuItem: TMenuItem;
@@ -85,8 +87,10 @@ type
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
     procedure PathEditKeyPress(Sender: TObject; var Key: char);
+    procedure ProgramMenuItemClick(Sender: TObject);
     procedure PropertiesPopupMenuItemClick(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
+    procedure ReferenceMenuItemClick(Sender: TObject);
     procedure RefreshPopupMenuItemClick(Sender: TObject);
     procedure RenamePopupMenuItemClick(Sender: TObject);
     procedure ShellListView1Change(Sender: TObject; Item: TListItem;
@@ -523,10 +527,34 @@ begin
   end;
 end;
 
+procedure TForm1.ReferenceMenuItemClick(Sender: TObject);
+begin
+  Application.MessageBox('F1 — Вызов справки' + #13#10 +
+    'F2 — Переименовывание выделенного файла (папки)'
+    + #13#10 + 'F5 — Обновление' + #13#10 +
+    'Alt + Стрелка влево — Переход назад' +
+    #13#10 + 'Alt + Стрелка вправо — Переход вперед' +
+    #13#10 + 'Mouse 4 — Переход вперед' + #13#10 +
+    'Mouse 5 — Переход назад' + #13#10 +
+    'Ctrl + Shift + C — Копирование пути файла (папки)',
+    'Справка', 0);
+end;
+
 procedure TForm1.PathEditKeyPress(Sender: TObject; var Key: char);
 begin
   if Key = #13 then
     GoButtonClick(Sender);
+end;
+
+procedure TForm1.ProgramMenuItemClick(Sender: TObject);
+begin
+  Application.MessageBox(
+    'Файловый менеджер — приложение для работы с файловой системой.'
+    + #13#10 + 'Версия 1.0.0' + #13#10#13#10 +
+    '© Вихрянов Т. Д., Образцов А. В., 2022' +
+    #13#10#13#10 +
+    'Распространяется по лицензии MIT (см. LICENSE.txt).',
+    'О программе', 0);
 end;
 
 procedure TForm1.RefreshPopupMenuItemClick(Sender: TObject);

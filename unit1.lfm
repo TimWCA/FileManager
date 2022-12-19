@@ -758,6 +758,15 @@ object Form1: TForm1
       ShortCut = 8238
       OnClick = DeleteMenuItemClick
     end
+    object ProgramMenuItem: TMenuItem
+      Caption = 'О программе'
+      OnClick = ProgramMenuItemClick
+    end
+    object ReferenceMenuItem: TMenuItem
+      Caption = 'Справка'
+      ShortCut = 112
+      OnClick = ReferenceMenuItemClick
+    end
   end
   object SelectDirectoryDialog1: TSelectDirectoryDialog
     Left = 123
