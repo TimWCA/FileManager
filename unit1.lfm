@@ -566,6 +566,7 @@ object Form1: TForm1
     SortColumn = 0
     SortType = stData
     TabOrder = 1
+    OnChange = ShellListView1Change
     OnDblClick = ShellListView1DblClick
     OnEdited = ShellListView1Edited
     OnEditing = ShellListView1Editing
