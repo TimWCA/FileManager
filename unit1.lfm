@@ -549,6 +549,7 @@ object Form1: TForm1
     Height = 558
     Top = 32
     Width = 192
+    Anchors = [akTop, akLeft, akBottom]
     FileSortType = fstNone
     TabOrder = 0
     OnClick = ShellTreeView1Click
@@ -560,6 +561,7 @@ object Form1: TForm1
     Height = 558
     Top = 32
     Width = 752
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clDefault
     MultiSelect = True
     PopupMenu = ShellListViewPopup
@@ -595,6 +597,7 @@ object Form1: TForm1
     Height = 23
     Top = 9
     Width = 808
+    Anchors = [akTop, akLeft, akRight]
     OnKeyPress = PathEditKeyPress
     TabOrder = 3
   end
@@ -603,6 +606,7 @@ object Form1: TForm1
     Height = 25
     Top = 9
     Width = 75
+    Anchors = [akTop, akRight]
     Caption = 'Перейти'
     OnClick = GoButtonClick
     TabOrder = 4
