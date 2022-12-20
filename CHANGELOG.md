@@ -6,6 +6,10 @@
 
 Формат основан на [«Ведите Changelog»](https://keepachangelog.com/ru/1.0.0/), и этот проект придерживается [семантического версионирования](https://semver.org/lang/ru/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/TimWCA/FileManager/releases/tag/v1.1.1) - 2022-12-20
+### Исправлено
+* Номер версии в окне «О программе»
+
 ## [1.0.1](https://github.com/TimWCA/FileManager/releases/tag/v1.0.1) - 2022-12-20
 ### Добавлено
 * Распахивание окна менеджера на весь экран
