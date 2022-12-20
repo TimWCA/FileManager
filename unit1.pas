@@ -37,6 +37,7 @@ type
     CopyPopupMenuItem: TMenuItem;
     DeletePopupMenuItem: TMenuItem;
     CopyPathPopupMenuItem: TMenuItem;
+    CreateZipPopupMenuItem: TMenuItem;
     ReferenceMenuItem: TMenuItem;
     ProgramMenuItem: TMenuItem;
     RenamePopupMenuItem: TMenuItem;
@@ -83,6 +84,7 @@ type
     procedure CreatePowerPointClick(Sender: TObject);
     procedure CreateTextClick(Sender: TObject);
     procedure CreateWordClick(Sender: TObject);
+    procedure CreateZipPopupMenuItemClick(Sender: TObject);
     procedure CutMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure DeleteMenuItemClick(Sender: TObject);
@@ -195,6 +197,7 @@ begin
       OpenPopupMenuItem.Visible := True;
       CutPopupMenuItem.Visible := True;
       CopyPopupMenuItem.Visible := True;
+      CreateZipPopupMenuItem.Visible := True;
       DeletePopupMenuItem.Visible := True;
       RenamePopupMenuItem.Visible := True;
       ViewPopupMenuItem.Visible := False;
@@ -209,6 +212,7 @@ begin
       OpenPopupMenuItem.Visible := False;
       CutPopupMenuItem.Visible := False;
       CopyPopupMenuItem.Visible := False;
+      CreateZipPopupMenuItem.Visible := False;
       DeletePopupMenuItem.Visible := False;
       RenamePopupMenuItem.Visible := False;
       ViewPopupMenuItem.Visible := True;
@@ -431,6 +435,22 @@ end;
 procedure TForm1.CreateExcelClick(Sender: TObject);
 begin
   FileSystemModule.CreateExcel(ShellListView1.Root);
+  FileSystemModule.Refresh(ShellListView1);
+end;
+
+// Создание сжатой ZIP-папки
+procedure TForm1.CreateZipPopupMenuItemClick(Sender: TObject);
+var
+  i: integer;
+  FilesList: TStringList;
+begin
+  FilesList := TStringList.Create;
+  for i := 0 to ShellListView1.Items.Count - 1 do
+  begin
+    if ShellListView1.Items[i].Selected then
+      FilesList.Add(ShellListView1.GetPathFromItem(ShellListView1.Items[i]));
+  end;
+  FileSystemModule.CreateZip(FilesList, ShellListView1.Root);
   FileSystemModule.Refresh(ShellListView1);
 end;
 

@@ -794,6 +794,10 @@ object Form1: TForm1
       Caption = 'Копировать'
       OnClick = CopyMenuItemClick
     end
+    object CreateZipPopupMenuItem: TMenuItem
+      Caption = 'Сжать в ZIP'
+      OnClick = CreateZipPopupMenuItemClick
+    end
     object DeletePopupMenuItem: TMenuItem
       Caption = 'Удалить'
       OnClick = DeleteMenuItemClick

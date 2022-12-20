@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Dialogs, Controls, ShellCtrls, LazFileUtils, FileUtil,
-  Forms;
+  Forms, Zipper;
 
 procedure CreateFolder(Root: string);
 procedure CreateAccess(Root: string);
@@ -15,6 +15,7 @@ procedure CreateWord(Root: string);
 procedure CreatePowerPoint(Root: string);
 procedure CreateText(Root: string);
 procedure CreateExcel(Root: string);
+procedure CreateZip(Files: TStringList; Root: string);
 procedure Cut(PathFromList: TStringList; PathTo: string);
 procedure Copy(PathFromList: TStringList; PathTo: string);
 procedure CopyDir(PathFrom: string; PathTo: string);
@@ -184,6 +185,29 @@ begin
   end;
 end;
 
+// Создаёт сжатые ZIP-папки
+procedure CreateZip(Files: TStringList; Root: string);
+var
+  Zipper: TZipper;
+  i: integer = 2;
+begin
+  Zipper := TZipper.Create;
+
+  if not FileExists(Root + '\Сжатая ZIP-папка.zip') then
+    Zipper.FileName := Root + '\Сжатая ZIP-папка.zip'
+  else
+  begin
+    while FileExists(Root + '\Сжатая ZIP-папка (' +
+        IntToStr(i) + ')' + '.zip') do
+      Inc(i);
+    Zipper.FileName := Root + '\Сжатая ZIP-папка (' +
+      IntToStr(i) + ')' + '.zip';
+  end;
+  Zipper.Entries.AddFileEntries(Files);
+  Zipper.UseLanguageEncoding := True;
+  Zipper.ZipAllFiles;
+end;
+
 // Вырезает файлы
 procedure Cut(PathFromList: TStringList; PathTo: string);
 var
@@ -253,13 +277,13 @@ var
 begin
   if MessageDlg('Удалить?',
     'Вы уверены, что хотите безвозвратно удалить ' +
-    IntToStr(PathList.Count) + ' файлов (папок)?', mtConfirmation,
-    [mbYes, mbNo], 0) = mrYes then
+    IntToStr(PathList.Count) + ' файлов (папок)?',
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     for i := 0 to PathList.Count - 1 do
-    if DirectoryExists(PathList[i]) then
-      DeleteDirectory(PathList[i], False)
-    else
-      DeleteFile(PathList[i]);
+      if DirectoryExists(PathList[i]) then
+        DeleteDirectory(PathList[i], False)
+      else
+        DeleteFile(PathList[i]);
 end;
 
 // Обновляет содержимое ShellListView
